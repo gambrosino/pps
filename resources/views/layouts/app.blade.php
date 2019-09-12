@@ -21,7 +21,7 @@
 <body class="h-screen text-gray-800 font-sans antialiased">
     <div id="app" class=" bg-blue-700">
         <nav class="bg-white shadow">
-            <div class="container mx-auto flex justify-between h-20 items-center">
+            <div class="container nav-container">
                 <div>
                     <img src="{{ asset('images/logo.png') }}" width="40" alt="dummy logo">
                 </div>
@@ -30,7 +30,7 @@
                     <ul class="flex">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="ml-6">
+                            <li>
                                 <a class="navbar-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))

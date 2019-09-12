@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto">
+<div class="container cards-container">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
@@ -10,7 +10,6 @@
         </div>
         <div class="card-body">
             <form class="flex flex-col" method="POST" action="{{ route('register') }}">
-                @csrf
                 <div class="field-group">
                     <label for="name" class="field-label">{{ __('Name') }}</label>
                     <input id="name" type="text" class="field @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -46,6 +45,8 @@
                     <button type="submit" class="button">
                         {{ __('Register') }}
                     </button>
+                </div>
+                @csrf
             </form>
         </div>
     </div>
