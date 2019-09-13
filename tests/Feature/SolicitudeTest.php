@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Solicitude;
-use App\Role;
 use App\ProfessionalPractice;
-use Tests\TestCase;
+use App\Role;
+use App\Solicitude;
+use App\User;
+use App\Mail\NewSolicitude;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class SolicitudeTest extends TestCase
 {
@@ -33,6 +35,23 @@ class SolicitudeTest extends TestCase
 
         $this->post('/solicitudes', $solicitude)
             ->assertRedirect('/login');
+    }
+
+    public function test_new_solicitude_fires_email()
+    {
+        Mail::fake();
+
+        $admin = factory(User::class)->create(['role_id' => Role::admin()]);
+
+        $solicitude = factory(Solicitude::class)->create();
+
+        Mail::assertSent(NewSolicitude::class, function ($mail) use ($admin) {
+            $this->assertTrue(
+                $mail->hasTo($admin->email),
+                "The mail has not been sent to [{$admin->email}]"
+            );
+            return true;
+        });
     }
 
     /**
