@@ -7,6 +7,7 @@ use App\Role;
 use App\Solicitude;
 use App\User;
 use App\Mail\NewSolicitude;
+use App\Mail\SolicitudeUpdated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -49,6 +50,24 @@ class SolicitudeTest extends TestCase
             $this->assertTrue(
                 $mail->hasTo($admin->email),
                 "The mail has not been sent to [{$admin->email}]"
+            );
+            return true;
+        });
+    }
+
+    public function test_update_state_fires_an_email()
+    {
+        Mail::fake();
+
+        $solicitude = factory(Solicitude::class)->create();
+        $solicitude->update(['status' => 'accepted']);
+
+        $student = $solicitude->student;
+
+        Mail::assertSent(SolicitudeUpdated::class, function ($mail) use ($student) {
+            $this->assertTrue(
+                $mail->hasTo($student->email),
+                "The mail has not been sent to [{$student->email}]"
             );
             return true;
         });

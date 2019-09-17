@@ -6,6 +6,7 @@ use App\Role;
 use App\User;
 use App\Solicitude;
 use App\Mail\NewSolicitude;
+use App\Mail\SolicitudeUpdated;
 use Illuminate\Support\Facades\Mail;
 
 class SolicitudeObserver
@@ -24,5 +25,12 @@ class SolicitudeObserver
         })->get();
 
         Mail::to($admins)->send(new NewSolicitude());
+    }
+
+    public function updating(Solicitude $solicitude)
+    {
+        if ($solicitude->isDirty('status')) {
+            Mail::to($solicitude->student)->send(new SolicitudeUpdated);
+        }
     }
 }
