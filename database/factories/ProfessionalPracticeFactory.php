@@ -13,7 +13,7 @@ $factory->define(ProfessionalPractice::class, function (Faker $faker) {
         'tutor_id' => factory(User::class)->create([
             'role_id' => Role::tutor()
         ]),
-        'solicitude_id' => factory(Solicitude::class),
+        'solicitude_id' => factory(Solicitude::class)->create(['status' => 'accepted']),
         'status' => 'active'
     ];
 });
