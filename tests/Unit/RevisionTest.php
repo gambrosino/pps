@@ -35,7 +35,7 @@ class RevisionTest extends TestCase
 
         $revision = factory(Revision::class)->raw();
 
-        $this->be($student)->post(route('revisions.store', $professionalPractice), $revision);
+        $this->be($student)->post(route('revision.store', $professionalPractice), $revision);
 
         $this->assertCount(1, $professionalPractice->revisions);
     }

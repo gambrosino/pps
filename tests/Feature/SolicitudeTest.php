@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\ProfessionalPractice;
+use App\Mail\NewSolicitude;
+use App\Mail\SolicitudeUpdated;
 use App\Role;
 use App\Solicitude;
 use App\User;
-use App\Mail\NewSolicitude;
-use App\Mail\SolicitudeUpdated;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class SolicitudeTest extends TestCase
@@ -93,4 +92,14 @@ class SolicitudeTest extends TestCase
             'The description is required' => ['description', '']
         ];
     }
+
+    public function test_it_should_show_a_link_to_create_a_new_solicitude()
+    {
+        $student = factory(User::class)->create(['role_id' => Role::student()]);
+
+        $this->be($student)->get(route('home'))
+            ->assertSeeText('Crear Nueva Solicitud')
+            ->assertStatus(200);
+    }
+
 }

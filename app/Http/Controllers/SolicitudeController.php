@@ -7,6 +7,11 @@ use App\Solicitude;
 
 class SolicitudeController extends Controller
 {
+    public function create()
+    {
+        return view('solicitudes.create');
+    }
+
     public function store(Request $request) {
 
         $solicitude = $this->validate($request, [
