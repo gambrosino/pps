@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::post('solicitudes', 'SolicitudeController@store');
     Route::post('professional-practices', 'ProfessionalPracticeController@store');
-
+    Route::patch('revisions/{revision}', 'RevisionController@update');
 });
 
 Auth::routes();

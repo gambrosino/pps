@@ -5,7 +5,10 @@ namespace Tests\Feature;
 use App\Revision;
 use Tests\TestCase;
 use App\Mail\NewRevision;
+use App\ProfessionalPractice;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -27,5 +30,22 @@ class ManageRevisionsTest extends TestCase
             );
             return true;
         });
+    }
+
+    public function test_documents_can_be_attached()
+    {
+        Storage::fake('documents');
+
+        $revision = factory(Revision::class)->create();
+        $student = $revision->professionalPractice->solicitude->student;
+
+        $this->be($student)
+            ->patch('/revisions/' . $revision->id, [
+                'document' => UploadedFile::fake()->create('doc.pdf')
+        ]);
+
+        $newDocument = $revision->refresh()->documents->first();
+
+        Storage::disk('local')->assertExists($newDocument->path);
     }
 }
