@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Revision::class, function (Faker $faker) {
     return [
-        'professional_practice_id' => factory(ProfessionalPractice::class)
+        'professional_practice_id' => factory(ProfessionalPractice::class),
+        'description' => $faker->paragraph
     ];
 });

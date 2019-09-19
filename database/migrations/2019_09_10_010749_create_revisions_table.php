@@ -16,6 +16,9 @@ class CreateRevisionsTable extends Migration
         Schema::create('revisions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('professional_practice_id');
+            $table->text('description');
+            $table->string('status')->default('pending');
+
             $table->timestamps();
         });
     }
