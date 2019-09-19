@@ -10,6 +10,8 @@ WORKDIR /var/www
 RUN apt-get update && apt-get install -y \
     build-essential \
     mariadb-client \
+    procps \
+    iputils-ping \
     libzip-dev \
     libpng-dev \
     libjpeg62-turbo-dev \
