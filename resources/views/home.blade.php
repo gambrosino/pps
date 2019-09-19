@@ -55,7 +55,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mt-4">
-                        <a href="{{ route('solicitudes.create') }}" dusk="create-solicitude" class="button">Crear Nueva Solicitud</a>
+                        <a href="{{ route('solicitude.create') }}" dusk="create-solicitude" class="button">Crear Nueva Solicitud</a>
                     </div>
                 </div>
             </div>
