@@ -27,7 +27,7 @@ class RevisionTest extends TestCase
         $this->assertInstanceOf(Collection::class, $revision->documents);
     }
 
-    public function test_it_can_be_created()
+    public function test_it_can_be_created_by_a_student()
     {
         $professionalPractice = factory(ProfessionalPractice::class)->create();
 
