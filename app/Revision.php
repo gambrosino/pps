@@ -19,8 +19,8 @@ class Revision extends Model
         return $this->hasMany(Document::class);
     }
 
-    public function attachDocument($path)
+    public function attachDocument($document)
     {
-        $this->documents()->create(['path' => $path]);
+        $this->documents()->create($document);
     }
 }

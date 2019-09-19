@@ -48,7 +48,7 @@ class RevisionTest extends TestCase
 
         $this->assertCount(1, $revision->documents);
 
-        $revision->attachDocument('example.pdf');
+        $revision->attachDocument(['title'=> 'example', 'path' => 'example.pdf']);
 
         $this->assertCount(2, $revision->fresh()->documents);
     }

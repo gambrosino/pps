@@ -16,6 +16,7 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('revision_id');
+            $table->string('title');
             $table->string('path');
             $table->timestamps();
         });
