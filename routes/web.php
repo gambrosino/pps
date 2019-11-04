@@ -16,16 +16,16 @@ Route::auth();
 //    return view('welcome');
 //});
 
-Route::get('', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::post('professional-practices', 'ProfessionalPracticeController@store');
-    Route::post('professional-practices/{professionalPractice}/revisions', 'RevisionController@store')->name('revision.store');
+    Route::post('professional-practices', 'ProfessionalPracticeController@store')->name('professional-practices.store');
+    Route::post('professional-practices/{professionalPractice}/revisions', 'RevisionController@store')->name('revisions.store');
 
-    Route::patch('revisions/{revision}', 'RevisionController@update');
+    Route::patch('revisions/{revision}', 'RevisionController@update')->name('revisions.update');
 
-    Route::get('solicitudes', 'SolicitudeController@create')->name('solicitude.create');
-    Route::post('solicitudes', 'SolicitudeController@store');
+    Route::get('solicitude', 'SolicitudeController@create')->name('solicitude.create');
+    Route::post('solicitude', 'SolicitudeController@store')->name('solicitude.store');
 });
 
 Auth::routes();

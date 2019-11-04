@@ -19,49 +19,46 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-screen text-gray-800 font-sans antialiased">
-    <div id="app" class=" bg-blue-700">
-        <nav class="bg-white shadow">
-            <div class="container nav-container">
-                <div>
-                    <img src="{{ asset('images/logo.png') }}" width="40" alt="dummy logo">
-                </div>
-                <div>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="flex">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li>
-                                <a class="navbar-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="ml-6">
-                                    <a class="navbar-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li>
-                                <a id="navbarDropdown" class="navbar-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                            </li>
-                            <li class="ml-6">
-                                <a class="navbar-link" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+<div id="app" class=" bg-blue-700">
+    <nav class="bg-white shadow">
+        <div class="container nav-container">
+            <div>
+                <img src="{{ asset('images/logo.png') }}" width="40" alt="dummy logo">
             </div>
-        </nav>
-        <main class="py-10 h-screen">
-            @yield('content')
-        </main>
-    </div>
+            <div>
+                <!-- Right Side Of Navbar -->
+                <ul class="flex">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li>
+                            <a class="navbar-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="ml-6">
+                                <a class="navbar-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li>
+                            <a id="navbarDropdown" class="navbar-link" href="#" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                        </li>
+                        <li class="ml-6">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="navbar-link" type="submit">{{ __('Logout') }}</button>
+                            </form>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="py-10 h-screen">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>

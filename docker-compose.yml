@@ -54,16 +54,21 @@ services:
     networks:
       - app-network
 
-  selenium-hub:
-    image: selenium/hub:3.12.0-americium
-    container_name: selenium-hub
-    ports:
-      - "4444:4444"
+  selenium:
+    image: selenium/standalone-chrome:3.141.59
+    depends_on:
+      - app
+    links:
+      - app:app-network.local
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - app-network
 
   chrome:
     image: selenium/node-chrome:3.12.0-americium
     depends_on:
-      - selenium-hub
+      - selenium
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444

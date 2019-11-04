@@ -11,7 +11,7 @@
             <div class="card-body">
                 <form class="flex flex-col" method="POST" action="{{ route('login') }}">
                     <div class="field-group">
-                        <label for="email" class="field-label">{{ __('E-Mail Address') }}</label>
+                        <label for="email" class="field-label">{{ __('Email Address') }}</label>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required="" autocomplete="email" autofocus="" class="field @error('email') is-invalid @enderror">
                         @error('email')
                             <span class="field-error" role="alert">
@@ -28,7 +28,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="mt-3 flex justify-start items-center ">
+                    <div class="mt-3 flex justify-start items-center">
                         <input class="mr-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="text-xs text-gray-700" for="remember">
                             {{ __('Remember Me') }}
