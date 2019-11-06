@@ -14,13 +14,14 @@ class SolicitudeController extends Controller
 
     public function store(Request $request) {
 
-        $solicitude = $this->validate($request, [
+        $this->validate($request, [
             'description' => 'required',
-            'status' => ''
+            'attachment' => 'required|mimes:pdf|max:20048'
         ]);
-
+        $solicitude = $request->only('description');
+        $solicitude['path'] = $request->file('attachment')->store('solicitude');
         auth()->user()->solicitudes()->create($solicitude);
 
-        return redirect('solicitudes');
+        return redirect()->route('solicitude.create');
     }
 }

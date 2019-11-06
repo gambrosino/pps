@@ -7,6 +7,8 @@ use App\Mail\SolicitudeUpdated;
 use App\Role;
 use App\Solicitude;
 use App\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -19,22 +21,27 @@ class SolicitudeTest extends TestCase
     {
         $student = factory(User::class)->create(['role_id' => Role::student()]);
 
-        $solicitude = factory(Solicitude::class)->raw(['user_id' => $student]);
-
         $this->be($student);
 
-        $this->post('/solicitudes', $solicitude)
-            ->assertRedirect('/solicitudes');
 
-        $this->assertDatabaseHas('solicitudes', $solicitude);
+        $this->post(route('solicitude.store'), [
+            'description' => 'description test',
+            'attachment' => UploadedFile::fake()->create('doc.pdf')
+        ])
+            ->assertRedirect(route('solicitude.create'));
+
+        $solicitude = Solicitude::first();
+
+        Storage::disk('local')->assertExists($solicitude->path);
+
     }
 
     public function test_only_logged_students_can_create_a_solicitude_for_a_pps()
     {
         $solicitude = factory(Solicitude::class)->raw();
 
-        $this->post('/solicitudes', $solicitude)
-            ->assertRedirect('/login');
+        $this->post(route('solicitude.store'), $solicitude)
+            ->assertRedirect(route('login'));
     }
 
     public function test_new_solicitude_fires_email()
@@ -82,14 +89,15 @@ class SolicitudeTest extends TestCase
         $solicitude = factory(Solicitude::class)->raw([$inputName => $value]);
 
         $this->be($student)
-            ->post('/solicitudes', $solicitude)
+            ->post(route('solicitude.store'), $solicitude)
             ->assertSessionHasErrors($inputName);
     }
 
     public function solicitudeFormValidationProvider()
     {
         return [
-            'The description is required' => ['description', '']
+            'The description is required' => ['description', ''],
+            'The attachment is required' => ['attachment', null],
         ];
     }
 
