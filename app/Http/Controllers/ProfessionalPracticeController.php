@@ -19,6 +19,13 @@ class ProfessionalPracticeController extends Controller
         return view('pps.index', compact('professionalPractices'));
     }
 
+    public function show(ProfessionalPractice $professionalPractice)
+    {
+        $professionalPractice->load(['solicitude.student', 'revisions', 'tutor']);
+
+        return view('pps.show', compact('professionalPractice'));
+    }
+
     public function create(Solicitude $solicitude)
     {
         $tutors = User::whereHas('role', function ($query) {
