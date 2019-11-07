@@ -115,21 +115,25 @@ class SolicitudeTest extends TestCase
         $admin = factory(User::class)->create(['role_id' => Role::admin()]);
 
         $this->be($admin);
-        $amount = 5;
+        $pending = 3;
+        $accepted = 2;
 
-        factory(Solicitude::class, $amount)->create(['status' => 'pending']);
-        factory(Solicitude::class)->create(['status' => 'accepted']);
+        factory(Solicitude::class, $pending)->create(['status' => 'pending']);
+        factory(Solicitude::class, $accepted)->create(['status' => 'accepted']);
 
         $response = $this->get(route('solicitude.index'));
         $response->assertStatus(200);
 
-        $countedSolicitudes = $response->getOriginalContent()
+        $this->assertEquals($pending, $response->getOriginalContent()
             ->getData()['solicitudes']
-            ->count();
+            ->count());
+
+        $this->assertEquals($accepted, $response->getOriginalContent()
+            ->getData()['acceptedSolicitudes']
+            ->count());
 
         $response->assertViewHas('solicitudes');
-
-        $this->assertEquals($amount, $countedSolicitudes);
+        $response->assertViewHas('acceptedSolicitudes');
 
     }
 }

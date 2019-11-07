@@ -11,7 +11,9 @@ class SolicitudeController extends Controller
     {
         $solicitudes = Solicitude::whereStatus('pending')->get();
 
-        return view('solicitudes.index', compact('solicitudes'));
+        $acceptedSolicitudes = Solicitude::whereStatus('accepted')->get();
+
+        return view('solicitudes.index', compact('solicitudes', 'acceptedSolicitudes'));
     }
 
     public function show(Solicitude $solicitude)
