@@ -3,8 +3,13 @@
 @section('content')
 
     <div class="container cards-container">
-        @component('pps.partials.card', compact('professionalPractice'))
-        @endcomponent
+        @include('pps.partials.card', compact('professionalPractice'))
+
+        @includeWhen(
+            $professionalPractice->revisions->count() > 0,
+            'pps.partials.revision-list',
+            compact('professionalPractice')
+        )
     </div>
 
 @endsection

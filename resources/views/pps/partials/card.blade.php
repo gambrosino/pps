@@ -1,4 +1,4 @@
-<div class="card mx-10">
+<div class="card">
     <div class="card-header">
         <h3 class="card-title">
             PPS

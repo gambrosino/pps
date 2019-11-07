@@ -26,6 +26,22 @@
     @apply px-4 text-sm;
 }
 
+.revision-list {
+    @apply shadow-lg text-xs;
+}
+
+.revision-item {
+    @apply px-2 py-3  border border-l-2 border-r-2 border-gray-300 flex
+}
+
+.revision-item:first-child {
+    @apply border-t-2 rounded-t;
+}
+
+.revision-item:last-child {
+    @apply border-b-2 rounded-b;
+}
+
 .field {
     @apply bg-gray-100 border rounded w-full p-2 mt-1;
 }
