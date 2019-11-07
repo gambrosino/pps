@@ -14,7 +14,9 @@
                             </h6>
                             Fecha de entrega: {{$revision->created_at->format('d/m/Y')}}
                         </div>
-
+                        <div class="ml-auto py-2">
+                            @include("pps.partials.{$revision->getOverallStatus()}")
+                        </div>
                     </div>
                 @endforeach
             </div>

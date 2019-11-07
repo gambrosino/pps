@@ -35,8 +35,25 @@ class RevisionTest extends TestCase
 
         $this->assertCount(1, $revision->documents);
 
-        $revision->attachDocument(['title'=> 'example', 'path' => 'example.pdf']);
+        $revision->attachDocument(['title' => 'example', 'path' => 'example.pdf']);
 
         $this->assertCount(2, $revision->fresh()->documents);
+    }
+
+    public function test_overall_status()
+    {
+        $revision = factory(Revision::class)->create();
+
+        $documents = factory(Document::class)->create(['revision_id' => $revision]);
+
+        $this->assertEquals('in-review', $revision->fresh()->getOverallStatus());
+
+        $documents->first()->update(['status' => 'rejected']);
+        $this->assertEquals('rejected', $revision->fresh()->getOverallStatus());
+
+        $documents->each(function ($document) {
+            $document->update(['status' => 'accepted']);
+        });
+        $this->assertEquals('accepted', $revision->fresh()->getOverallStatus());
     }
 }
