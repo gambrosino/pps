@@ -29,6 +29,9 @@ class ViewServiceProvider extends ServiceProvider
             'home.admin', \App\Http\View\Composers\Home\AdminComposer::class
         );
 
+        View::composer(
+            'home.tutor', \App\Http\View\Composers\Home\TutorComposer::class
+        );
 
         // Using Closure based composers...
 //        View::composer('dashboard', function ($view) {
