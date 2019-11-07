@@ -20,7 +20,7 @@
                 @foreach ($solicitudes as $s)
                     <tr>
                         <td class="px-3 py-3">{{ $s->student->name }}</td>
-                        <td class="px-3 py-3">{{ $s->student->fileNumber }}</td>
+                        <td class="px-3 py-3">{{ $s->student->file_number }}</td>
                         <td class="px-3 py-3">{{ $s->created_at->format('d/m/Y') }}</td>
                         <td class="px-3 py-3">
                             <a href="{{ route('solicitude.show', ['solicitude' => $s]) }}" class="button">Ver</a>
