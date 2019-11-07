@@ -20,9 +20,11 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('solicitude/{solicitude}/accept', 'ProfessionalPracticeController@create')->name('professional-practices.create');
+    Route::get('professional-practices/{professionalPractice}/', 'ProfessionalPracticeController@show')->name('professional-practices.show');
+    Route::get('professional-practices', 'ProfessionalPracticeController@index')->name('professional-practices.index');
     Route::post('professional-practices', 'ProfessionalPracticeController@store')->name('professional-practices.store');
-    Route::post('professional-practices/{professionalPractice}/revisions', 'RevisionController@store')->name('revisions.store');
 
+    Route::post('professional-practices/{professionalPractice}/revisions', 'RevisionController@store')->name('revisions.store');
     Route::patch('revisions/{revision}', 'RevisionController@update')->name('revisions.update');
 
     Route::get('solicitude', 'SolicitudeController@index')->name('solicitude.index');

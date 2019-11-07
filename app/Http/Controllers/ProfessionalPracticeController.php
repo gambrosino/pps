@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProfessionalPractice;
 use App\Role;
 use App\Solicitude;
 use App\User;
@@ -9,6 +10,15 @@ use Illuminate\Http\Request;
 
 class ProfessionalPracticeController extends Controller
 {
+    public function index()
+    {
+        $professionalPractices = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
+            ->where(['status' => 'active'])
+            ->get();
+
+        return view('pps.index', compact('professionalPractices'));
+    }
+
     public function create(Solicitude $solicitude)
     {
         $tutors = User::whereHas('role', function ($query) {
