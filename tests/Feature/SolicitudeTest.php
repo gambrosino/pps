@@ -28,11 +28,11 @@ class SolicitudeTest extends TestCase
             'description' => 'description test',
             'attachment' => UploadedFile::fake()->create('doc.pdf')
         ])
-            ->assertRedirect(route('solicitude.create'));
+            ->assertRedirect(route('home'));
 
         $solicitude = Solicitude::first();
 
-        Storage::disk('local')->assertExists($solicitude->path);
+        Storage::disk('solicitude')->assertExists($solicitude->path);
 
     }
 
@@ -113,14 +113,12 @@ class SolicitudeTest extends TestCase
     public function test_an_admin_can_view_a_pending_solicitude()
     {
         $admin = factory(User::class)->create(['role_id' => Role::admin()]);
-        
+
         $this->be($admin);
         $amount = 5;
 
-        $pendingsSolicitudes = factory(Solicitude::class, $amount)
-            ->create(['status' => 'pending']);
-        $acceptedSolicitude = factory(Solicitude::class)
-            ->create(['status'=>'accepted']);
+        factory(Solicitude::class, $amount)->create(['status' => 'pending']);
+        factory(Solicitude::class)->create(['status' => 'accepted']);
 
         $response = $this->get(route('solicitude.index'));
         $response->assertStatus(200);

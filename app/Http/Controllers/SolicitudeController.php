@@ -32,10 +32,13 @@ class SolicitudeController extends Controller
             'description' => 'required',
             'attachment' => 'required|mimes:pdf|max:20048'
         ]);
+
         $solicitude = $request->only('description');
-        $solicitude['path'] = $request->file('attachment')->store('solicitude');
+
+        $solicitude['path'] = $request->file('attachment')->store('', ['disk' => 'solicitude']);
+
         auth()->user()->solicitudes()->create($solicitude);
 
-        return redirect()->route('solicitude.create');
+        return redirect()->route('home');
     }
 }

@@ -53,7 +53,7 @@ class ManageRevisionsTest extends TestCase
         $student = $revision->professionalPractice->solicitude->student;
 
         $this->be($student)
-            ->patch('/revisions/' . $revision->id, [
+            ->patch(route('revisions.update', $revision->id), [
                 'document' => UploadedFile::fake()->create('doc.pdf'),
                 'title' => 'example'
         ]);
@@ -62,6 +62,6 @@ class ManageRevisionsTest extends TestCase
 
         $this->assertEquals('example', $newDocument->title);
 
-        Storage::disk('local')->assertExists($newDocument->path);
+        Storage::disk('documents')->assertExists($newDocument->path);
     }
 }

@@ -27,7 +27,7 @@ class RevisionController extends Controller
             'document' => 'required|mimes:pdf,doc,docx'
         ]);
 
-        $path = $request->file('document')->store('documents');
+        $path = $request->file('document')->store('', ['disk' => 'documents']);
 
         $document = Document::make(['title' => request('title'), 'path' => $path])->toArray();
 

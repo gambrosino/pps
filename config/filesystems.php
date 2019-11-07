@@ -55,6 +55,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'documents' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/documents'),
+            'url' => env('APP_URL').'/storage/documents',
+            'visibility' => 'public',
+        ],
+
+        'solicitude' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/solicitude'),
+            'url' => env('APP_URL').'/storage/solicitude',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
