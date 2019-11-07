@@ -772,6 +772,11 @@ video {
   color: #dd6b20;
 }
 
+.badge-success {
+  background-color: #81e6d9;
+  color: #319795;
+}
+
 @media (min-width: 768px) {
   .nav-container {
     padding-left: 0;

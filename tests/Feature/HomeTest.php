@@ -10,13 +10,6 @@ class HomeTest extends TestCase
 {
     use RefreshDatabase;
 
-//    public function test_welcome_view()
-//    {
-//        $response = $this->get('/')
-//            ->assertStatus(200)
-//            ->assertViewIs('welcome');
-//    }
-
     public function test_home_view()
     {
         $user = factory(User::class)->create();

@@ -73,6 +73,9 @@
 .badge-warning {
     @apply bg-orange-300 text-orange-600;
 }
+.badge-success {
+    @apply bg-teal-300 text-teal-600;
+}
 
 @screen md {
     .nav-container{

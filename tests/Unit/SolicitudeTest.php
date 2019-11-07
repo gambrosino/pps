@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\ProfessionalPractice;
 use App\Role;
 use App\Solicitude;
 use App\User;
@@ -21,5 +22,17 @@ class SolicitudeTest extends TestCase
         $this->assertInstanceOf(User::class, $solicitude->student);
 
         $this->assertEquals(Role::student()->name, $solicitude->student->role->name);
+    }
+
+    public function test_it_must_has_a_pps()
+    {
+        $solicitude = factory(Solicitude::class)->create();
+
+        $professionalPractice = factory(ProfessionalPractice::class)->create(['solicitude_id' => $solicitude]);
+
+        $this->assertInstanceOf(ProfessionalPractice::class, $solicitude->professionalPractice);
+
+        $this->assertEquals($professionalPractice->id, $solicitude->professionalPractice->id);
+
     }
 }

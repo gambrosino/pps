@@ -127,9 +127,9 @@ class SolicitudeTest extends TestCase
             ->getData()['solicitudes']
             ->count();
 
-        $response->assertViewHas('solicitudes', Solicitude::whereStatus('pending')->get());
+        $response->assertViewHas('solicitudes');
 
         $this->assertEquals($amount, $countedSolicitudes);
-        
+
     }
 }
