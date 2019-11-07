@@ -7,6 +7,13 @@ use App\Solicitude;
 
 class SolicitudeController extends Controller
 {
+    public function index() 
+    {
+        $solicitudes = Solicitude::whereStatus('pending')->get();
+    
+        return view('solicitudes.index',compact('solicitudes'));
+    }
+
     public function create()
     {
         return view('solicitudes.create');

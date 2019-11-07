@@ -24,7 +24,8 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('revisions/{revision}', 'RevisionController@update')->name('revisions.update');
 
-    Route::get('solicitude', 'SolicitudeController@create')->name('solicitude.create');
+    Route::get('solicitude', 'SolicitudeController@index')->name('solicitude.index');
+    Route::get('solicitude/create', 'SolicitudeController@create')->name('solicitude.create');
     Route::post('solicitude', 'SolicitudeController@store')->name('solicitude.store');
 });
 

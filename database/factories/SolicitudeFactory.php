@@ -10,7 +10,7 @@ use Faker\Generator as Faker;
 $factory->define(Solicitude::class, function (Faker $faker) {
     return [
         'user_id' => factory(User::class)->create(['role_id' => Role::student()]),
-        'status' => $faker->sentence(),
+        'status' => $faker->randomElement(['pending', 'accepted']),
         'description' => $faker->paragraph(),
         'path' => '/solicitude/test.pdf'
     ];

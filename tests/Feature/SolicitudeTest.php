@@ -110,4 +110,28 @@ class SolicitudeTest extends TestCase
             ->assertStatus(200);
     }
 
+    public function test_an_admin_can_view_a_pending_solicitude()
+    {
+        $admin = factory(User::class)->create(['role_id' => Role::admin()]);
+        
+        $this->be($admin);
+        $amount = 5;
+
+        $pendingsSolicitudes = factory(Solicitude::class, $amount)
+            ->create(['status' => 'pending']);
+        $acceptedSolicitude = factory(Solicitude::class)
+            ->create(['status'=>'accepted']);
+
+        $response = $this->get(route('solicitude.index'));
+        $response->assertStatus(200);
+
+        $countedSolicitudes = $response->getOriginalContent()
+            ->getData()['solicitudes']
+            ->count();
+
+        $response->assertViewHas('solicitudes', Solicitude::whereStatus('pending')->get());
+
+        $this->assertEquals($amount, $countedSolicitudes);
+        
+    }
 }

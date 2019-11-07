@@ -16,7 +16,7 @@ class CreateSolicitudesTable extends Migration
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('status')->default('pending');
+            $table->enum('status', ['pending', 'accepted'])->default('pending');
             $table->text('description');
             $table->string('path');
             $table->timestamps();
