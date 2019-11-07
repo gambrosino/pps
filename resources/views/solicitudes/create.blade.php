@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                {{ __('Register') }}
+                {{ __('Cargar Solicitud') }}
             </h3>
         </div>
         <div class="card-body">

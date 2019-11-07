@@ -20,12 +20,12 @@ class UserLoginTest extends DuskTestCase
         $user = factory(\App\User::class)->create();
 
         $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/login')
+            $browser->visit(route('login', [], false))
                 ->assertSee('LOGIN')
                 ->type('email', $user->email)
                 ->type('password', 'password')
                 ->press('LOGIN')
-                ->assertPathIs('/');
+                ->assertPathIs(route('home', [], false));
         });
     }
 
@@ -39,10 +39,10 @@ class UserLoginTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
+                ->visit(route('home', [], false))
                 ->assertSee('LOGOUT')
                 ->press('LOGOUT')
-                ->assertPathIs('/login');
+                ->assertPathIs(route('login', [], false));
         });
     }
 }
