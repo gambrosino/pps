@@ -24,10 +24,10 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('revisions/{revision}', 'RevisionController@update')->name('revisions.update');
 
+    Route::get('solicitude/{solicitude}', 'SolicitudeController@show')->name('solicitude.show');
     Route::get('solicitude', 'SolicitudeController@index')->name('solicitude.index');
     Route::get('solicitude/create', 'SolicitudeController@create')->name('solicitude.create');
     Route::post('solicitude', 'SolicitudeController@store')->name('solicitude.store');
 });
 
 Auth::routes();
-

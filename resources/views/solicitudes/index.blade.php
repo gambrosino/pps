@@ -17,30 +17,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="px-3 py-3">Guido Amborisno</td>
-                    <td class="px-3 py-3">38695</td>
-                    <td class="px-3 py-3">05/11/2019</td>
-                    <td class="px-3 py-3">
-                        <button class="button">Ver</button>
-                    </td>
-                </tr>
-                <tr class="bg-gray-100">
-                    <td class="px-3 py-3">Federico Biondi</td>
-                    <td class="px-3 py-3">37458</td>
-                    <td class="px-3 py-3">06/11/2019</td>
-                    <td class="px-3 py-3">
-                        <button class="button">Ver</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="px-3 py-3">Lucas Arregui</td>
-                    <td class="px-3 py-3">37223</td>
-                    <td class="px-3 py-3">09/11/2019</td>
-                    <td class="px-3 py-3">
-                        <button class="button">Ver</button>
-                    </td>
-                </tr>
+                @foreach ($solicitudes as $s)
+                    <tr>
+                        <td class="px-3 py-3">{{ $s->student->name }}</td>
+                        <td class="px-3 py-3">{{ $s->student->fileNumber }}</td>
+                        <td class="px-3 py-3">{{ $s->created_at->format('d/m/Y') }}</td>
+                        <td class="px-3 py-3">
+                            <a href="{{ route('solicitude.show', ['solicitude' => $s]) }}" class="button">Ver</a>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
