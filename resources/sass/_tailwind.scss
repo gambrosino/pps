@@ -66,6 +66,14 @@
     @apply text-gray-700;
 }
 
+.badge {
+    @apply px-2 rounded-full shadow uppercase tracking-wide font-semibold;
+}
+
+.badge-warning {
+    @apply bg-orange-300 text-orange-600;
+}
+
 @screen md {
     .nav-container{
         @apply px-0;

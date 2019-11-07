@@ -757,6 +757,21 @@ video {
   color: #4a5568;
 }
 
+.badge {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+
+.badge-warning {
+  background-color: #fbd38d;
+  color: #dd6b20;
+}
+
 @media (min-width: 768px) {
   .nav-container {
     padding-left: 0;
