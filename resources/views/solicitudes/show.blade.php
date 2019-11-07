@@ -35,7 +35,10 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a href="{{ asset($solicitude->path) }}" class="text-blue-600 font-bold">Ver Solicitud</a>
+                    <a href="{{ asset($solicitude->path) }}" class="text-blue-600 font-bold flex">
+                        <svg class="fill-current w-3 mr-2"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                        Descargar Solicitud
+                    </a>
                 </div>
                 <div class="mt-8">
                     <a href="" class="button">Aceptar</a>
