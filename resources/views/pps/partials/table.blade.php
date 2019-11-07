@@ -22,5 +22,11 @@
             </td>
         </tr>
     @endforeach
+
+    @if($professionalPractices->count() == 0)
+        <tr>
+            <td class="px-3 py-3" colspan="4">No hay prácticas profesionales para mostrar</td>
+        </tr>
+    @endif
     </tbody>
 </table>

@@ -18,5 +18,11 @@
             </td>
         </tr>
     @endforeach
+
+    @if($solicitudes->count() == 0)
+        <tr>
+            <td class="px-3 py-3" colspan="4">No hay solicitudes para mostrar</td>
+        </tr>
+    @endif
     </tbody>
 </table>
