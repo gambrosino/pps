@@ -27,7 +27,7 @@
 @endforeach
 
 @if($user->solicitudes->count() == 0 ||
-    ($user->solicitudes->count() == 1 && is_null($user->solicitudes->first()->professionalPractice)) ))
+    ($user->solicitudes->count() == 1 && is_null($user->solicitudes->first()->professionalPractice)) )
 <div class="card mx-10">
     <div class="card-header">
         <h3 class="card-title">
