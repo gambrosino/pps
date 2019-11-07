@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('solicitude/create', 'SolicitudeController@create')->name('solicitude.create');
     Route::get('solicitude/{solicitude}', 'SolicitudeController@show')->name('solicitude.show');
     Route::post('solicitude', 'SolicitudeController@store')->name('solicitude.store');
+
+    Route::put('documents/{document}', 'DocumentController@update')->name('documents.update');
 });
 
 Auth::routes();

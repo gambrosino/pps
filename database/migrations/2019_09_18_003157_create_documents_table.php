@@ -16,6 +16,7 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('revision_id');
+            $table->enum('status', ['in-review', 'rejected', 'accepted'])->default('in-review');
             $table->string('title');
             $table->string('path');
             $table->timestamps();
