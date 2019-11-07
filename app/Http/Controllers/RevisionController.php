@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class RevisionController extends Controller
 {
+    public function show(Revision $revision)
+    {
+        $revision->load('documents');
+
+        return view('revisions.show', compact('revision'));
+    }
+
     public function store(Request $request, ProfessionalPractice $professionalPractice)
     {
         $revision = $this->validate($request, [

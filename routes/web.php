@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('professional-practices', 'ProfessionalPracticeController@store')->name('professional-practices.store');
 
     Route::post('professional-practices/{professionalPractice}/revisions', 'RevisionController@store')->name('revisions.store');
+    Route::get('revisions/{revision}', 'RevisionController@show')->name('revisions.show');
     Route::patch('revisions/{revision}', 'RevisionController@update')->name('revisions.update');
 
     Route::get('solicitude', 'SolicitudeController@index')->name('solicitude.index');

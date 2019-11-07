@@ -19,7 +19,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-screen text-gray-800 font-sans antialiased">
-<div id="app" class=" bg-blue-700">
+<div id="app" class=" bg-gray-800">
     <nav class="bg-white shadow">
         <div class="container nav-container">
             <div>

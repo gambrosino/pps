@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="revision-list">
                 @foreach ($professionalPractice->revisions as $revision)
-                    <div class="revision-item">
+                <a href="{{ route('revisions.show', ['revision' => $revision]) }}" class="revision-item">
                         <div>
                             <h6 class="font-semibold">
                                 Revision {{$loop->iteration}}
@@ -17,7 +17,7 @@
                         <div class="ml-auto py-2">
                             @include("pps.partials.{$revision->getOverallStatus()}")
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 

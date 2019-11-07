@@ -34,6 +34,10 @@
     @apply px-2 py-3  border border-l-2 border-r-2 border-gray-300 flex
 }
 
+.revision-item:hover {
+    @apply shadow-inner shadow-lg border-indigo-100;
+}
+
 .revision-item:first-child {
     @apply border-t-2 rounded-t;
 }
