@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container cards-container">
-        @if (false)
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -51,7 +50,6 @@
                     </form>
                 </div>
             </div>
-        @else
             <div class="card">
                 <div class="card-body">
                     <div class="mt-4">
@@ -59,6 +57,5 @@
                     </div>
                 </div>
             </div>
-        @endif
-    </div>
+        </div>
 @endsection
