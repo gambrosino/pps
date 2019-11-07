@@ -21,15 +21,20 @@
 </div>
 
 @foreach($user->solicitudes as $solicitude)
-    @include('pps.partials.card', ['professionalPractice' => $solicitude->professionalPractice])
+    @includeWhen(!is_null($solicitude->professionalPractice), 'pps.partials.card', [
+        'professionalPractice' => $solicitude->professionalPractice
+    ])
 @endforeach
 
+@if($user->solicitudes->count() == 0 ||
+    ($user->solicitudes->count() == 1 && is_null($user->solicitudes->first()->professionalPractice)) ))
 <div class="card mx-10">
     <div class="card-header">
         <h3 class="card-title">
             Solicitud
         </h3>
     </div>
+
     <div class="card-body">
         @foreach($user->solicitudes as $solicitude)
 
@@ -57,10 +62,13 @@
             <hr>
         @endforeach
 
-        <div class="mt-5">
-            <a href="{{ route('solicitude.create') }}"
-               dusk="create-solicitude" class="button">Crear Nueva Solicitud</a>
-        </div>
+        @if ($user->solicitudes->count() == 0)
+            <div class="mt-5">
+                <a href="{{ route('solicitude.create') }}"
+                   dusk="create-solicitude" class="button">Crear Nueva Solicitud</a>
+            </div>
+        @endif
 
     </div>
 </div>
+@endif
