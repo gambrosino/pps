@@ -679,6 +679,7 @@ video {
   font-weight: 700;
   font-size: 1.125rem;
   color: #2a4365;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .card-body {
@@ -804,6 +805,10 @@ video {
 .badge-success {
   background-color: #81e6d9;
   color: #319795;
+}
+
+.text-shadow {
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 @media (min-width: 768px) {

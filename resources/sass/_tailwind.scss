@@ -19,7 +19,7 @@
 }
 
 .card-title {
-    @apply uppercase tracking-wide font-bold text-lg text-blue-900;
+    @apply uppercase tracking-wide font-bold text-lg text-blue-900 text-shadow;
 }
 
 .card-body {
@@ -91,6 +91,10 @@
 }
 .badge-success {
     @apply bg-teal-300 text-teal-600;
+}
+
+.text-shadow {
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 @screen md {
