@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('solicitude/{solicitude}', 'SolicitudeController@show')->name('solicitude.show');
     Route::post('solicitude', 'SolicitudeController@store')->name('solicitude.store');
 
+    Route::get('documents/{document}', 'DocumentController@show')->name('documents.show');
     Route::put('documents/{document}', 'DocumentController@update')->name('documents.update');
 });
 

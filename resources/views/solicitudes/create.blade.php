@@ -24,7 +24,7 @@
                     @enderror
                 </div>
                 <div class="field-group">
-                    <label for="description" class="field-label">{{ __('Descrición') }}</label>
+                    <label for="description" class="field-label">{{ __('Descripción') }}</label>
                     <textarea id="description" type="text" name="description" value="{{ old('description') }}" autocomplete="description" class="field @error('description') is-invalid @enderror"></textarea>
                     @error('description')
                         <span class="field-error" role="alert">
