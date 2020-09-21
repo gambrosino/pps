@@ -23,6 +23,12 @@
             Fecha de entrega:
             <span class="text-gray-700">{{ $solicitude->created_at->format('d/m/Y') }}</span>
         </div>
+        @if($solicitude->professionalPractice)
+        <div class="mt-2">
+            Tutor:
+            <span class="text-gray-700">{{ $solicitude->professionalPractice->tutor->name}}</span>
+        </div>
+        @endif
         <div class="mt-2">
             Descripción:
             <div class="mt-2 px-2 py-3 border border-gray-200 bg-gray-100 rounded shadow-md">
@@ -30,8 +36,8 @@
             </div>
         </div>
         <div class="mt-3">
-            <a href="{{asset('storage/'.$solicitude->path)}}"
-               class="text-blue-600 font-bold">
+            <a href="{{asset('storage/solicitude/'.$solicitude->path)}}"
+               class="text-blue-600 font-bold" target="_blank">
                 Ver Solicitud
             </a>
         </div>

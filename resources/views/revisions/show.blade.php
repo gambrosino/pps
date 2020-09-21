@@ -6,7 +6,7 @@
         <div class="card pb-6">
             <div class="card-header">
                 <h3 class="card-title">
-                    Revision
+                    Avance
                 </h3>
             </div>
             <div class="card-body">

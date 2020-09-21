@@ -7,7 +7,7 @@
 
         @component('solicitudes.partials.card', compact('solicitude'))
 
-            @if(auth()->user()->role->name == 'admin')
+            @if(auth()->user()->role->name == 'admin' && !$solicitude->professionalPractice)
                 <div class="mt-8">
                     <a href="{{ route('professional-practices.create', ['solicitude' => $solicitude]) }}"
                        class="button">Aceptar Solicitud</a>

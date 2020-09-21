@@ -29,6 +29,15 @@
                     @enderror
                 </div>
                 <div class="field-group">
+                    <label for="file_number" class="field-label">{{ __('Legajo') }}</label>
+                    <input id="file_number" type="number" name="file_number" value="{{ old('file_number') }}" required autocomplete="file_number" autofocus="" class="field @error('file_number') is-invalid @enderror">
+                    @error('file_number')
+                        <span class="field-error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="field-group">
                     <label for="password" class="field-label">{{ __('Password') }}</label>
                     <input id="password" type="password" class="field @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                     @error('password')

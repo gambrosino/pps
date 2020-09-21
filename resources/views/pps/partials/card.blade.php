@@ -16,21 +16,44 @@
                 {{$professionalPractice->created_at->format('d/m/Y')}}
             </span>
         </div>
-        <div class="mt-2">
-            Tutor:
-            <span class="text-gray-700 uppercase font-semibold tracking-wide">
-                {{$professionalPractice->tutor->name}}
-            </span>
-        </div>
+        @if (auth()->user()->role->name != 'tutor')
+            <div class="mt-2">
+                Tutor:
+                <span class="text-gray-700 uppercase font-semibold tracking-wide">
+                    {{$professionalPractice->tutor->name}}
+                </span>
+            </div>
+        @endif
+        @if (auth()->user()->role->name != 'student')
+            <div class="mt-2">
+                Alumno:
+                <span class="text-gray-700 uppercase font-semibold tracking-wide">
+                    {{$professionalPractice->solicitude->student->name}}
+                </span>
+            </div>
+        @endif
         <div class="mt-2">
             <span class="font-semibold">{{$professionalPractice->revisions->count()}}</span>
-            revisiones
+            avances registrados
         </div>
         <div class="mt-2">
-            <span class="font-semibold">120</span>
+            <span class="font-semibold">{{$professionalPractice->getAcceptedRevisionsCount()}}</span>
+            avances aprobados
+        </div>
+        <div class="mt-2">
+        <span class="font-semibold">{{$professionalPractice->accepted_hours ?? 0}}</span>
             de 200 horas completadas
         </div>
-
+        @if ($professionalPractice->status == 'active' && auth()->user()->role->name == 'student')
+        <div class="mt-4">
+            <a href="{{ route('professional-practices.show', ['professionalPractice' => $professionalPractice]) }}"
+               class="text-blue-600 font-bold">Ver Avances</a>
+        </div>
+        <div class="mt-4">
+            <a href="{{ route('revisions.create', ['professionalPractice' => $professionalPractice]) }}"
+               class="text-blue-600 font-bold">Añadir Avance</a>
+        </div>
+        @endif
         <div class="mt-4">
             <a href="{{ route('solicitude.show', ['solicitude' => $professionalPractice->solicitude]) }}"
                class="text-blue-600 font-bold">Ver Solicitud</a>

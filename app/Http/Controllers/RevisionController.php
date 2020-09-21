@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class RevisionController extends Controller
 {
+    public function create(ProfessionalPractice $professionalPractice)
+    {
+        return view('revisions.create', compact('professionalPractice'));
+    }
+
     public function show(Revision $revision)
     {
         $revision->load('documents');
@@ -18,13 +23,15 @@ class RevisionController extends Controller
 
     public function store(Request $request, ProfessionalPractice $professionalPractice)
     {
+
         $revision = $this->validate($request, [
-            'description' => 'required|string|min:10'
+            'description' => 'required|string|min:10',
+            'hours' =>'required|numeric|min:0'
         ]);
 
         $professionalPractice->revisions()->create($revision);
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function update(Request $request, Revision $revision)
