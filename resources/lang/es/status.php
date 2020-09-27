@@ -9,5 +9,10 @@ return [
         'active' => 'Activa',
         'completed' => 'Completada',
         'in_revision' => 'En Revision',
+    ],
+    'revision' => [
+        'accepted' => 'Aceptado',
+        'pending' => 'Pendiente',
+        'rejected' => 'Rechazado',
     ]
 ];

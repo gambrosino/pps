@@ -37,7 +37,7 @@
             avances registrados
         </div>
         <div class="mt-2">
-            <span class="font-semibold">{{$professionalPractice->getAcceptedRevisionsCount()}}</span>
+            <span class="font-semibold">{{$professionalPractice->getAcceptedRevisions()->count()}}</span>
             avances aprobados
         </div>
         <div class="mt-2">

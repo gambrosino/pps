@@ -7,24 +7,34 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Crear Revision
+                    Crear Avance
                 </h3>
             </div>
 
             <div class="card-body">
-                <form class="flex flex-col" method="POST" action="{{ route('revisions.store',$professionalPractice->id) }}">
-                    <div class="field-group">
+                <form class="flex flex-col" method="POST" action="{{ route('revisions.store',$professionalPractice->id) }}" enctype="multipart/form-data">
 
-                        <label for="revision_attachments" class="field-label">{{ __('Adjuntar Revisión') }}</label>
-                        <input id="revision_attachments" type="file" class=" @error('attachment') is-invalid @enderror" name="revision_attachments" value="{{ old('revision_attachments') }}" required >
-                        @error('attachment')
+                    <div class="field-group">
+                        <label for="title" class="field-label">{{ __('Titulo del Avance') }}</label>
+                        <input id="title" type="text" name="title" value="{{ old('title') }}" autocomplete="title" class="field @error('title') is-invalid @enderror" >
+                        @error('title')
                             <span class="field-error" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="field-group">
 
+                    <div class="field-group">
+                        <label for="document" class="field-label">{{ __('Adjuntar Avance') }}</label>
+                        <input id="document" type="file" class=" @error('document') is-invalid @enderror" name="document" value="{{ old('document') }}" required >
+                        @error('document')
+                            <span class="field-error" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="field-group">
                         <label for="description" class="field-label">{{ __('Descripción') }}</label>
                         <textarea id="description" type="text" name="description" value="{{ old('description') }}" autocomplete="description" class="field @error('description') is-invalid @enderror"></textarea>
                         @error('description')
@@ -47,16 +57,12 @@
 
                     <div class="mt-4 flex justify-between items-baseline">
                         <button type="submit" class="button">
-                            {{ __('Crear Revisión') }}
+                            {{ __('Crear Avance') }}
                         </button>
                     </div>
                     @csrf
                 </form>
-
             </div>
         </div>
-
     </div>
-
-
 @endsection

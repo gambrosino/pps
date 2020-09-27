@@ -23,7 +23,7 @@ class Revision extends Model
         $this->documents()->create($document);
     }
 
-    public function getOverallStatus()
+    /*public function getOverallStatus()
     {
         $documents = $this->documents;
         $accepted = $documents->every(function ($document) {
@@ -37,5 +37,5 @@ class Revision extends Model
                 return $document->status == 'rejected';
             }) ? 'rejected' : 'in-review';
         }
-    }
+    }*/
 }

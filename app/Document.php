@@ -12,4 +12,11 @@ class Document extends Model
     {
         return $this->belongsTo(Revision::class);
     }
+
+    public function customUpdate($status)
+    {
+        $this->update($status);
+
+        $this->revision->update([ 'status' => $status['status'] ]);
+    }
 }

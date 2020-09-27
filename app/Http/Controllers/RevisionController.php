@@ -23,13 +23,22 @@ class RevisionController extends Controller
 
     public function store(Request $request, ProfessionalPractice $professionalPractice)
     {
-
         $revision = $this->validate($request, [
-            'description' => 'required|string|min:10',
+            'description' => 'required|string|min:10'
+        ]);
+        $request->validate([
+            'title' => 'required|string|min:5',
+            'document' => 'required|mimes:pdf,doc,docx',
             'hours' =>'required|numeric|min:0'
         ]);
 
+        $path = $request->file('document')->store('', ['disk' => 'documents']);
+
+        $document = Document::make(['title' => request('title'), 'path' => $path, 'hours' => request('hours')] )->toArray();
+
         $professionalPractice->revisions()->create($revision);
+
+        $professionalPractice->revisions()->get()->last()->attachDocument($document);
 
         return redirect('/');
     }
@@ -38,15 +47,18 @@ class RevisionController extends Controller
     {
         $request->validate([
             'title' => 'required|string|min:5',
-            'document' => 'required|mimes:pdf,doc,docx'
+            'document' => 'required|mimes:pdf,doc,docx',
+            'hours' =>'required|numeric|min:0'
         ]);
 
         $path = $request->file('document')->store('', ['disk' => 'documents']);
 
-        $document = Document::make(['title' => request('title'), 'path' => $path])->toArray();
+        $document = Document::make(['title' => request('title'), 'path' => $path, 'hours' => request('hours')] )->toArray();
 
         $revision->attachDocument($document);
 
-        return redirect('/home');
+        $revision->update(['status'=>'pending']);
+
+        return redirect('/');
     }
 }

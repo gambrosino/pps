@@ -26,7 +26,7 @@ class ProfessionalPractice extends Model
     public function getAcceptedHoursAttribute()
     {
         return $this->revisions()->where('status','accepted')->get()->reduce(function ($totalHours, $revision) {
-            return $totalHours + $revision->hours;
+            return $totalHours + $revision->documents->last()->hours;
         });
     }
 
@@ -35,13 +35,8 @@ class ProfessionalPractice extends Model
         return $this->revisions()->where(['status'=>'accepted'])->get();
     }
 
-    public function getAcceptedRevisionsCount()
+    public function getNonAcceptedRevisions()
     {
-        return $this->revisions()->where(['status'=>'accepted'])->get()->count();
-    }
-
-    public function getPendingRevisions()
-    {
-        return $this->revisions()->where(['status'=>'pending'])->get();
+        return $this->revisions()->where('status','<>','accepted')->get();
     }
 }
