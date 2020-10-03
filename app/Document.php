@@ -18,5 +18,7 @@ class Document extends Model
         $this->update($status);
 
         $this->revision->update([ 'status' => $status['status'] ]);
+
+        $this->revision->professionalPractice->checkTotalHours();
     }
 }

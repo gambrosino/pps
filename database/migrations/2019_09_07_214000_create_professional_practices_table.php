@@ -17,7 +17,7 @@ class CreateProfessionalPracticesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tutor_id');
             $table->unsignedBigInteger('solicitude_id');
-            $table->enum('status', ['active', 'completed', 'in_revision'])->default('active');
+            $table->enum('status', ['active', 'completed', 'hours_completed', 'in_revision'])->default('active');
             $table->timestamps();
         });
     }

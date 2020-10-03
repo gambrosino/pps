@@ -39,4 +39,12 @@ class ProfessionalPractice extends Model
     {
         return $this->revisions()->where('status','<>','accepted')->get();
     }
+
+    public function checkTotalHours()
+    {
+        if($this->getAcceptedHoursAttribute() >= 200)
+        {
+            $this->update(['status'=>'hours_completed']);
+        }
+    }
 }

@@ -8,6 +8,7 @@ return [
     'pps' => [
         'active' => 'Activa',
         'completed' => 'Completada',
+        'hours_completed' => '200 Horas Completadas',
         'in_revision' => 'En Revision',
     ],
     'revision' => [
