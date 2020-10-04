@@ -57,7 +57,7 @@
 
                     <div class="mt-4 flex justify-between items-baseline">
                         <button type="submit" class="button">
-                            {{ __('Crear Avance') }}
+                            {{ __('Crear') }}
                         </button>
                     </div>
                     @csrf

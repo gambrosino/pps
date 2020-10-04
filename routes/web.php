@@ -34,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::get('solicitude/{solicitude}', 'SolicitudeController@show')->name('solicitude.show');
     Route::post('solicitude', 'SolicitudeController@store')->name('solicitude.store');
 
+    Route::get('professional-practices/{professionalPractice}/reports', 'ReportController@create')->name('reports.create');
+    Route::post('professional-practices/{professionalPractice}/reports', 'ReportController@store')->name('reports.store');
+    Route::get('reports/{report}', 'ReportController@show')->name('reports.show');
+    Route::patch('reports/{report}', 'ReportController@update')->name('reports.update');
+
     Route::get('documents/{document}', 'DocumentController@show')->name('documents.show');
     Route::patch('documents/{document}', 'DocumentController@update')->name('documents.update');
 });

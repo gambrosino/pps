@@ -29,6 +29,7 @@ class TutorComposer
     {
         $professionalPractices = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
             ->where(['status' => 'active'])
+            ->orWhere(['status' => 'hours_completed'])
             ->get();
 
         $solicitudes = Solicitude::whereStatus('pending')->get();

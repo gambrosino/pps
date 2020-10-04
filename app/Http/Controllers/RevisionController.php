@@ -40,7 +40,7 @@ class RevisionController extends Controller
 
         $professionalPractice->revisions()->get()->last()->attachDocument($document);
 
-        return redirect('/');
+        return redirect()->route('professional-practices.show',$professionalPractice);
     }
 
     public function update(Request $request, Revision $revision)
