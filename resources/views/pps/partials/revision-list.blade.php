@@ -53,7 +53,7 @@
     </div>
 </div>
 
-@if ($professionalPractice->status == "hours_completed" || $professionalPractice->status == "in_revision")
+@if ($professionalPractice->status != "active")
     <div class="card pb-6">
         <div class="card-header">
             <h3 class="card-title">

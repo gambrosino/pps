@@ -45,10 +45,12 @@
             informes finales registrados
         </div>
         @if (auth()->user()->role->name == 'student')
-            <div class="mt-4">
-                <a href="{{ route('professional-practices.show', ['professionalPractice' => $professionalPractice]) }}"
-                class="text-blue-600 font-bold">Estado General de PPS</a>
-            </div>
+            @if (Request::url() != route('professional-practices.show',compact('professionalPractice')))
+                <div class="mt-4">
+                    <a href="{{ route('professional-practices.show', ['professionalPractice' => $professionalPractice]) }}"
+                    class="text-blue-600 font-bold">Estado General de PPS</a>
+                </div>
+            @endif
             @if ($professionalPractice->status == 'active')
                 <div class="mt-4">
                     <a href="{{ route('revisions.create', ['professionalPractice' => $professionalPractice]) }}"
@@ -62,9 +64,17 @@
                 </div>
             @endif
         @endif
-        <div class="mt-4">
-            <a href="{{ route('solicitude.show', ['solicitude' => $professionalPractice->solicitude]) }}"
-               class="text-blue-600 font-bold">Ver Solicitud de PPS</a>
-        </div>
+        @if ($professionalPractice->status == 'in_revision' && auth()->user()->role->name == 'admin')
+                <div class="mt-4">
+                    <a href="{{ route('certificate.create', ['professionalPractice' => $professionalPractice]) }}"
+                    class="text-blue-600 font-bold">Aprobar Practica Profesional</a>
+                </div>
+            @endif
+        @if (Request::url() != route('professional-practices.show',compact('professionalPractice')))
+            <div class="mt-4">
+                <a href="{{ route('solicitude.show', ['solicitude' => $professionalPractice->solicitude]) }}"
+                class="text-blue-600 font-bold">Ver Solicitud de PPS</a>
+            </div>
+        @endif
     </div>
 </div>

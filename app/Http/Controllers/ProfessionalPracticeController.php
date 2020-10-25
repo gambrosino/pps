@@ -12,11 +12,16 @@ class ProfessionalPracticeController extends Controller
 {
     public function index()
     {
-        $professionalPractices = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
-            ->where('status', '!=', 'completed')
+        $professionalPracticesActives = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
+            ->where([ 'status' => 'active' ])
+            ->orWhere([ 'status' => 'hours_completed' ])
             ->get();
 
-        return view('pps.index', compact('professionalPractices'));
+        $professionalPracticesInRevision = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
+        ->where([ 'status' => 'in_revision' ])
+        ->get();
+
+        return view('pps.index', compact('professionalPracticesActives', 'professionalPracticesInRevision'));
     }
 
     public function show(ProfessionalPractice $professionalPractice)

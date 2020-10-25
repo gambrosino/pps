@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('documents/{document}', 'DocumentController@show')->name('documents.show');
     Route::patch('documents/{document}', 'DocumentController@update')->name('documents.update');
+
+    Route::get('professional-practices/{professionalPractice}/certificate', 'CertificateController@create')->name('certificate.create');
+    Route::post('professional-practices/{professionalPractice}/certificate', 'CertificateController@store')->name('certificate.store');
 });
 
 Auth::routes();
