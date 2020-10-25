@@ -35,6 +35,14 @@
                 <span class="text-gray-700 text-xs">{{ $solicitude->description }}</span>
             </div>
         </div>
+        @if ($solicitude->status == 'rejected')
+            <div class="mt-2">
+                Motivo de Rechazo:
+                <div class="mt-2 px-2 py-3 border border-gray-200 bg-gray-100 rounded shadow-md">
+                    <span class="text-gray-700 text-xs">{{ $solicitude->message }}</span>
+                </div>
+            </div>
+        @endif
         <div class="mt-3">
             <a href="{{asset('storage/solicitude/'.$solicitude->path)}}"
                class="text-blue-600 font-bold" target="_blank">

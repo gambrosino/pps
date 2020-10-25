@@ -4,6 +4,7 @@ return [
     'solicitude' => [
         'pending' => 'Pendiente',
         'accepted' => 'Aceptada',
+        'rejected' => 'Rechazada'
     ],
     'pps' => [
         'active' => 'Activa',

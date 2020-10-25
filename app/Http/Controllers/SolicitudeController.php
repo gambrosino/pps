@@ -13,7 +13,9 @@ class SolicitudeController extends Controller
 
         $acceptedSolicitudes = Solicitude::whereStatus('accepted')->get();
 
-        return view('solicitudes.index', compact('solicitudes', 'acceptedSolicitudes'));
+        $rejectedSolicitudes = Solicitude::whereStatus('rejected')->get();
+
+        return view('solicitudes.index', compact('solicitudes', 'acceptedSolicitudes', 'rejectedSolicitudes'));
     }
 
     public function show(Solicitude $solicitude)
@@ -40,6 +42,19 @@ class SolicitudeController extends Controller
         $solicitude['path'] = $request->file('attachment')->store('', ['disk' => 'solicitude']);
 
         auth()->user()->solicitudes()->create($solicitude);
+
+        return redirect()->route('home');
+    }
+
+    public function update(Request $request, Solicitude $solicitude)
+    {
+        $fields = $this->validate($request, [
+            'message' => 'required|min:20'
+        ]);
+
+        $fields['status'] = 'rejected';
+
+        $solicitude->update($fields);
 
         return redirect()->route('home');
     }

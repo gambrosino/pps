@@ -27,7 +27,7 @@
 @endforeach
 
 @if($user->solicitudes->count() == 0 ||
-    ($user->solicitudes->count() == 1 && is_null($user->solicitudes->first()->professionalPractice)) )
+    (is_null($user->solicitudes->last()->professionalPractice)) )
 <div class="card mx-10">
     <div class="card-header">
         <h3 class="card-title">
@@ -53,6 +53,14 @@
                 <span class="text-gray-700 uppercase font-semibold tracking-wide">Fecha de solicitud:</span>
                 {{$solicitude->created_at->format('d/m/Y')}}
             </div>
+            @if ($solicitude->status == 'rejected')
+                <div class="mt-2">
+                    <span class="text-gray-700 uppercase font-semibold tracking-wide">Motivo de Rechazo:</span>
+                    <p>
+                        {{$solicitude->message}}
+                    </p>
+                </div>
+            @endif
             <div class="mt-3 mb-3">
                 <a href="{{ asset('storage/solicitude/'.$solicitude->path) }}"
                    target="_blank" class="text-blue-600 font-bold" target="_blank">
@@ -62,8 +70,8 @@
             <hr>
         @endforeach
 
-        @if ($user->solicitudes->count() == 0)
-            <div class="mt-5">
+        @if ($user->solicitudes->count() == 0 || $user->solicitudes->last()->status == 'rejected')
+            <div class="mt-5 text-center">
                 <a href="{{ route('solicitude.create') }}"
                    dusk="create-solicitude" class="button">Crear Nueva Solicitud</a>
             </div>
