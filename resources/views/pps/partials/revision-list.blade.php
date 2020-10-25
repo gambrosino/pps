@@ -1,4 +1,4 @@
-@if ($professionalPractice->status == "active")
+@if ($professionalPractice->getNonAcceptedRevisions()->count() != 0)
     <div class="card pb-6">
         <div class="card-header">
             <h3 class="card-title">
@@ -26,32 +26,34 @@
     </div>
 @endif
 
-<div class="card pb-6">
-    <div class="card-header">
-        <h3 class="card-title">
-            Avances Aceptados
-        </h3>
-    </div>
-    <div class="card-body">
-        <div class="revision-list">
-            @foreach ($professionalPractice->getAcceptedRevisions() as $revision)
-                <a href="{{ route('revisions.show', ['revision' => $revision]) }}" class="revision-item">
-                    <div>
-                        <h6 class="font-semibold">
-                            Avance {{$revision->id}}
-                        </h6>
-                        <div>Fecha de entrega: {{$revision->created_at->format('d/m/Y')}}</div>
-                        <div>Horas: {{$revision->documents->last()->hours}}</div>
-                    </div>
-                    <div class="ml-auto py-2">
-                        @include("pps.partials.{$revision->status}")
-                    </div>
-                </a>
-            @endforeach
+@if ($professionalPractice->getAcceptedRevisions()->count() != 0)
+    <div class="card pb-6">
+        <div class="card-header">
+            <h3 class="card-title">
+                Avances Aceptados
+            </h3>
         </div>
+        <div class="card-body">
+            <div class="revision-list">
+                @foreach ($professionalPractice->getAcceptedRevisions() as $revision)
+                    <a href="{{ route('revisions.show', ['revision' => $revision]) }}" class="revision-item">
+                        <div>
+                            <h6 class="font-semibold">
+                                Avance {{$revision->id}}
+                            </h6>
+                            <div>Fecha de entrega: {{$revision->created_at->format('d/m/Y')}}</div>
+                            <div>Horas: {{$revision->documents->last()->hours}}</div>
+                        </div>
+                        <div class="ml-auto py-2">
+                            @include("pps.partials.{$revision->status}")
+                        </div>
+                    </a>
+                @endforeach
+            </div>
 
+        </div>
     </div>
-</div>
+@endif
 
 @if ($professionalPractice->status != "active")
     <div class="card pb-6">
@@ -63,7 +65,7 @@
         <div class="card-body">
             <div class="revision-list">
                 @foreach ($professionalPractice->reports as $report)
-                    @if(auth()->user()->role->name == 'tutor')
+                    @if(auth()->user()->role->name != 'student')
                         <a href="{{ route('reports.show', ['report' => $report]) }}" class="revision-item">
                             <div>
                                 <h6 class="font-semibold">

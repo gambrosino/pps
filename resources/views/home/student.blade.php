@@ -21,6 +21,7 @@
 </div>
 
 @foreach($user->solicitudes as $solicitude)
+
     @includeWhen(!is_null($solicitude->professionalPractice), 'pps.partials.card', [
         'professionalPractice' => $solicitude->professionalPractice
     ])

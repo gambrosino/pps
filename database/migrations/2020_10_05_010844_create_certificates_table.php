@@ -16,8 +16,9 @@ class CreateCertificatesTable extends Migration
         Schema::create('certificates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('professional_practice_id');
-            $table->unsignedInteger('certificate_number');
-            $table->string('description');
+            $table->unsignedInteger('number');
+            $table->unsignedInteger('folio');
+            $table->unsignedInteger('note');
 
             $table->timestamps();
         });

@@ -32,7 +32,7 @@
                         @include("pps.partials.{$document->status}")
                     </div>
                 </div>
-                @if ($document->status == 'pending')
+                @if ($document->status == 'pending' || auth()->user()->role->name == 'admin')
                     <form class="mt-4" method="POST" action="{{route('documents.update', ['document' => $document]) }}">
                         <div class="field-group">
                             <label for="status" class="field-label">Resultado</label>

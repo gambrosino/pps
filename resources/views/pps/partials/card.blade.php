@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
-            PPS
+            Practica Profesional Sup.
         </h3>
     </div>
     <div class="card-body">
@@ -57,14 +57,14 @@
                     class="text-blue-600 font-bold">Añadir Avance</a>
                 </div>
             @endif
-            @if ($professionalPractice->status == 'hours_completed')
+            @if ($professionalPractice->status == 'hours_completed' || ( $professionalPractice->status == 'in_revision' && $professionalPractice->reports->last()->status == 'rejected' ))
                 <div class="mt-4">
                     <a href="{{ route('reports.create', ['professionalPractice' => $professionalPractice]) }}"
                     class="text-blue-600 font-bold">Añadir Informe Final</a>
                 </div>
             @endif
         @endif
-        @if ($professionalPractice->status == 'in_revision' && auth()->user()->role->name == 'admin')
+        @if ($professionalPractice->status == 'in_revision' && auth()->user()->role->name == 'admin' && $professionalPractice->reports->last()->status == 'accepted' && $professionalPractice->getNonAcceptedRevisions()->count() == 0)
                 <div class="mt-4">
                     <a href="{{ route('certificate.create', ['professionalPractice' => $professionalPractice]) }}"
                     class="text-blue-600 font-bold">Aprobar Practica Profesional</a>

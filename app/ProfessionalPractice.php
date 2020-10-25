@@ -28,6 +28,11 @@ class ProfessionalPractice extends Model
         return $this->hasMany(Report::class);
     }
 
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
+    }
+
     public function getAcceptedHoursAttribute()
     {
         return $this->revisions()->where('status','accepted')->get()->reduce(function ($totalHours, $revision) {
@@ -47,7 +52,7 @@ class ProfessionalPractice extends Model
 
     public function checkTotalHours()
     {
-        if($this->getAcceptedHoursAttribute() >= 200)
+        if($this->getAcceptedHoursAttribute() >= 200 && $this->status == 'active')
         {
             $this->update(['status'=>'hours_completed']);
         }
@@ -58,6 +63,14 @@ class ProfessionalPractice extends Model
         if($this->reports()->get()->last()->status == 'accepted')
         {
             $this->update(['status'=>'in_revision']);
+        }
+    }
+
+    public function complete()
+    {
+        if($this->status == 'in_revision')
+        {
+            $this->update(['status'=>'completed']);
         }
     }
 }

@@ -21,7 +21,11 @@ class ProfessionalPracticeController extends Controller
         ->where([ 'status' => 'in_revision' ])
         ->get();
 
-        return view('pps.index', compact('professionalPracticesActives', 'professionalPracticesInRevision'));
+        $professionalPracticesCompleted = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
+        ->where([ 'status' => 'completed' ])
+        ->get();
+
+        return view('pps.index', compact('professionalPracticesActives', 'professionalPracticesInRevision', 'professionalPracticesCompleted'));
     }
 
     public function show(ProfessionalPractice $professionalPractice)

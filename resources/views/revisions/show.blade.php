@@ -23,7 +23,7 @@
                 </div>
                 <div class="revision-list mt-5">
                     @foreach ($revision->documents as $document)
-                        @if(auth()->user()->role->name == 'tutor')
+                        @if(auth()->user()->role->name != 'student')
                             <a href="{{ route('documents.show', ['document' => $document]) }}" class="revision-item">
                                 <div>
                                     <h6 class="font-semibold mb-2">
