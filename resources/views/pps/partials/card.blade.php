@@ -57,7 +57,7 @@
                     class="text-blue-600 font-bold">Añadir Avance</a>
                 </div>
             @endif
-            @if ($professionalPractice->status == 'hours_completed' || ( $professionalPractice->status == 'in_revision' && $professionalPractice->reports->last()->status == 'rejected' ))
+            @if (($professionalPractice->status == 'hours_completed' && $professionalPractice->reports->count() == 0) || (($professionalPractice->status == 'hours_completed'|| $professionalPractice->status == 'in_revision') && $professionalPractice->reports->last()->status == 'rejected'))
                 <div class="mt-4">
                     <a href="{{ route('reports.create', ['professionalPractice' => $professionalPractice]) }}"
                     class="text-blue-600 font-bold">Añadir Informe Final</a>

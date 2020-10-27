@@ -102,3 +102,27 @@
         </div>
     </div>
 @endif
+
+@if ($professionalPractice->status == "completed")
+    <div class="card pb-6">
+        <div class="card-header">
+            <h3 class="card-title">
+                Acta de Examen
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="revision-list">
+                <div class="revision-item">
+                    <div>
+                        <h6 class="font-semibold mb-2">
+                            Alumno: {{$professionalPractice->solicitude->student->name}}
+                        </h6>
+                        <div>Acta: {{$professionalPractice->certificates->first()->number}}</div>
+                        <div>Folio: {{$professionalPractice->certificates->first()->folio}}</div>
+                        <div>Nota: {{$professionalPractice->certificates->first()->note}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif

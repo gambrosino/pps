@@ -56,7 +56,7 @@
             </div>
         </div>
     </nav>
-    <main class="py-10 h-screen">
+    <main class="py-10 h-full min-h-screen">
         @yield('content')
     </main>
 </div>

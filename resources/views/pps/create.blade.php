@@ -24,7 +24,7 @@
 
                         <label for="tutor_id" class="field-label">{{ __('Tutor') }}</label>
                         <select name="tutor_id" id="tutor_id"
-                                class="@error('tutor_id') is-invalid @enderror"
+                                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('tutor_id') is-invalid @enderror"
                                 required autocomplete="off">
                             <option value="null" selected disabled>Seleccione Tutor</option>
                             @foreach($tutors as $tutor)

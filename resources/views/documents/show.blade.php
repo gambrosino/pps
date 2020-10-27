@@ -32,34 +32,36 @@
                         @include("pps.partials.{$document->status}")
                     </div>
                 </div>
-                @if ($document->status == 'pending' || auth()->user()->role->name == 'admin')
-                    <form class="mt-4" method="POST" action="{{route('documents.update', ['document' => $document]) }}">
-                        <div class="field-group">
-                            <label for="status" class="field-label">Resultado</label>
-                            <div class="w-full flex pt-2">
-                                <div class="flex items-center w-1/4">
-                                    <span class="mr-1 text-xs">Aprobado</span>
-                                    <input type="radio" id="status" name="status" value="accepted" checked>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="mr-1 text-xs">Reprobado</span>
-                                    <input type="radio" id="status" name="status" value="rejected">
+                @if ($document->revision->professionalPractice->status != 'completed')
+                    @if ($document->status == 'pending' || auth()->user()->role->name == 'admin')
+                        <form class="mt-4" method="POST" action="{{route('documents.update', ['document' => $document]) }}">
+                            <div class="field-group">
+                                <label for="status" class="field-label">Resultado</label>
+                                <div class="w-full flex pt-2">
+                                    <div class="flex items-center w-1/4">
+                                        <span class="mr-1 text-xs">Aprobado</span>
+                                        <input type="radio" id="status" name="status" value="accepted" checked>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="mr-1 text-xs">Reprobado</span>
+                                        <input type="radio" id="status" name="status" value="rejected">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="field-group">
-                            <label for="message" class="field-label">Mensaje</label>
-                            <textarea id="message" type="text" name="message" value="{{ old('message') }}" class="field @error('message') is-invalid @enderror"></textarea>
-                            @error('message')
-                                <span class="field-error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <button class="button mt-4" type="submit">Guardar</button>
-                        @method('PATCH')
-                        @csrf
-                    </form>
+                            <div class="field-group">
+                                <label for="message" class="field-label">Mensaje</label>
+                                <textarea id="message" type="text" name="message" value="{{ old('message') }}" class="field @error('message') is-invalid @enderror"></textarea>
+                                @error('message')
+                                    <span class="field-error" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <button class="button mt-4" type="submit">Guardar</button>
+                            @method('PATCH')
+                            @csrf
+                        </form>
+                    @endif
                 @endif
             </div>
         </div>

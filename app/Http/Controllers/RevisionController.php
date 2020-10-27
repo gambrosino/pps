@@ -29,7 +29,7 @@ class RevisionController extends Controller
         $request->validate([
             'title' => 'required|string|min:5',
             'document' => 'required|mimes:pdf,doc,docx',
-            'hours' =>'required|numeric|min:0'
+            'hours' =>'required|numeric|min:0|max:20'
         ]);
 
         $path = $request->file('document')->store('', ['disk' => 'documents']);
