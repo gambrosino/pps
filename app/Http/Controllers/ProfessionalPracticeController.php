@@ -57,6 +57,6 @@ class ProfessionalPracticeController extends Controller
 
         $professionalPractice->solicitude->update(['status' => 'accepted']);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message','Solicitud Aprobada');
     }
 }

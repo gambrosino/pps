@@ -7,9 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Nueva solicitud de PPS realizada por el alumno: {{$user->name}}</h2>
+    <h2>Hola {{$name}}</h2>
     <p>
-        Por favor ingresar al sistema para evaluar dicha solicitud.
+        Su usuario ha sido creado con exito.
     </p>
     <p>
         Saludos coordiales, Departamento de PPS UTN-Frro.

@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="container cards-container">
-        @include('partials.back', ['route' => route('home')])
 
         @component('solicitudes.partials.card', compact('solicitude'))
 

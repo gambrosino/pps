@@ -43,7 +43,7 @@ class SolicitudeController extends Controller
 
         auth()->user()->solicitudes()->create($solicitude);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message','Solicitud Enviada');
     }
 
     public function update(Request $request, Solicitude $solicitude)
@@ -56,6 +56,6 @@ class SolicitudeController extends Controller
 
         $solicitude->update($fields);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message','Solicitud Actualizada');
     }
 }

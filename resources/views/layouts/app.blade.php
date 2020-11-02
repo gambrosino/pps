@@ -56,7 +56,17 @@
             </div>
         </div>
     </nav>
-    <main class="py-10 h-full min-h-screen">
+    <main class="py-5 h-full min-h-screen">
+        <div class="container mx-auto mb-5">
+            @if (session('message'))
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                    {{session('message')}}
+                </div>
+            @endif
+            @if (Request::url() != route('home') && Request::url() != route('login') && Request::url() != route('register'))
+                    @include('partials.back', ['route' => url()->previous()])
+            @endif
+        </div>
         @yield('content')
     </main>
 </div>

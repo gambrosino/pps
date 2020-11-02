@@ -24,7 +24,7 @@ class SolicitudeObserver
             $q->where('name', 'admin');
         })->get();
 
-        Mail::to($admins)->send(new NewSolicitude());
+        Mail::to($admins)->send(new NewSolicitude($solicitude->student));
     }
 
     public function updating(Solicitude $solicitude)

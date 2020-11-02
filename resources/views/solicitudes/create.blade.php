@@ -4,8 +4,6 @@
 
 <div class="container cards-container">
 
-    @include('partials.back', ['route' => route('home')])
-
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">

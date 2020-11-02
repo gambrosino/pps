@@ -7,20 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewSolicitude extends Mailable
+class NewUser extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $user;
+    
+    public $name; 
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($name)
     {
-        $this->user = $user;
+        $this->name = $name;
     }
 
     /**
@@ -30,6 +30,6 @@ class NewSolicitude extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Solicitude')->view('emails.new-solicitude');
+        return $this->subject('New User Created')->view('emails.new-user');
     }
 }
