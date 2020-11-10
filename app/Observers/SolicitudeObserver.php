@@ -24,13 +24,14 @@ class SolicitudeObserver
             $q->where('name', 'admin');
         })->get();
 
-        Mail::to($admins)->send(new NewSolicitude($solicitude->student));
+        Mail::to($admins)->send(new NewSolicitude($solicitude));
     }
 
     public function updating(Solicitude $solicitude)
     {
         if ($solicitude->isDirty('status')) {
-            Mail::to($solicitude->student)->send(new SolicitudeUpdated);
+            $student = $solicitude->student;
+            Mail::to($student)->send(new SolicitudeUpdated);
         }
     }
 }

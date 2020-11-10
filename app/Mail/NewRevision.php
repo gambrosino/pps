@@ -11,14 +11,16 @@ class NewRevision extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $revision;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($revision)
     {
-        //
+        $this->revision = $revision;
     }
 
     /**
@@ -28,6 +30,8 @@ class NewRevision extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new-revision');
+        return $this->subject('PPS-UTN-Frro: Nueva Revision subida')->view('emails.new-revision')->with([
+            'userName' => $this->revision->professionalPractice->solicitude->student->name,
+        ]);
     }
 }

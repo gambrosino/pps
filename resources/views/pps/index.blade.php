@@ -5,8 +5,6 @@
 
 <div class="mx-auto container">
 
-    @include('partials.back', ['route' => route('home')])
-
     @if ($professionalPracticesInRevision->count() >= 1)
         <div class="w-full border-blue-400 mt-10 border-t-8 rounded bg-white pb-3">
             <div>

@@ -66,6 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //TODO: move this function to UserObserver
         Mail::to($data['email'])->send(new NewUser($data['name']));
         return User::create([
             'name' => $data['name'],

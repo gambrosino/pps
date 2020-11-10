@@ -40,7 +40,7 @@ class RevisionController extends Controller
 
         $professionalPractice->revisions()->get()->last()->attachDocument($document);
 
-        return redirect()->route('professional-practices.show',$professionalPractice);
+        return redirect()->route('professional-practices.show',$professionalPractice)->with('message','Revision Creada');
     }
 
     public function update(Request $request, Revision $revision)
@@ -59,6 +59,6 @@ class RevisionController extends Controller
 
         $revision->update(['status'=>'pending']);
 
-        return redirect('/');
+        return redirect('/')->with('message','Revision Actualizada');
     }
 }

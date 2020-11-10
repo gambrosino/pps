@@ -28,6 +28,6 @@ class SolicitudeUpdated extends Mailable
      */
     public function build()
     {
-        return $this->subject('Update Solicitude')->view('emails.solicitude-updated');
+        return $this->subject('PPS-UTN-Frro: Solicitud de PPS Actualizada')->view('emails.solicitude-updated');
     }
 }

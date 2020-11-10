@@ -7,20 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewUser extends Mailable
+class RevisionCorrected extends Mailable
 {
     use Queueable, SerializesModels;
-    
-    public $name; 
+
+    protected $revision;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($revision)
     {
-        $this->name = $name;
+        $this->revision = $revision;
     }
 
     /**
@@ -30,6 +30,9 @@ class NewUser extends Mailable
      */
     public function build()
     {
-        return $this->subject('PPS-UTN-Frro: Nuevo Usuario Creado')->view('emails.new-user');
+        return $this->subject('PPS-UTN-Frro: Revisión Corregida')->view('emails.revision-corrected')->with([
+            'userName' => $this->revision->professionalPractice->solicitude->student->name,
+            'revision' => $this->revision->description,
+        ]);
     }
 }

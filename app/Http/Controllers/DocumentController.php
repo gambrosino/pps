@@ -20,6 +20,6 @@ class DocumentController extends Controller
         ]);
         $document->customUpdate($status);
 
-        return redirect()->route('professional-practices.index');
+        return redirect()->route('professional-practices.index')->with('message','Revision Actualizada');
     }
 }

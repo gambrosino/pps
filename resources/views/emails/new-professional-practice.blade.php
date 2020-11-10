@@ -7,9 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Nueva solicitud de PPS realizada por el alumno: {{$userName}}</h2>
+    <h2>Se ha iniciado una Practica Profesional  para el alumno: {{$userName}}</h2>
+    <h2>El profesor: {{$tutorName}} ha sido designado como tutor responsable.</h2>
     <p>
-        Por favor ingresar al sistema para evaluar dicha solicitud.
+        Por favor ingresar al sistema para evaluar situación actual.
     </p>
     <p>
         Saludos coordiales, Departamento de PPS UTN-Frro.

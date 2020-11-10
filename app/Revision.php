@@ -22,20 +22,4 @@ class Revision extends Model
     {
         $this->documents()->create($document);
     }
-
-    /*public function getOverallStatus()
-    {
-        $documents = $this->documents;
-        $accepted = $documents->every(function ($document) {
-            return $document->status == 'accepted';
-        });
-
-        if ($documents->isNotEmpty() && $accepted) {
-            return 'accepted';
-        } else {
-            return $documents->contains(function ($document, $key) {
-                return $document->status == 'rejected';
-            }) ? 'rejected' : 'in-review';
-        }
-    }*/
 }

@@ -7,6 +7,8 @@ use App\Role;
 use App\Solicitude;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPPS;
 
 class ProfessionalPracticeController extends Controller
 {
@@ -56,6 +58,9 @@ class ProfessionalPracticeController extends Controller
         $professionalPractice = $tutor->supervisedPractices()->create($request->all(['solicitude_id']));
 
         $professionalPractice->solicitude->update(['status' => 'accepted']);
+
+        //TODO: move this function to ProfessionalPracticeObserver
+        Mail::to($tutor)->send(new NewProfessionalPractice($professionalPractice));
 
         return redirect()->route('home')->with('message','Solicitud Aprobada');
     }

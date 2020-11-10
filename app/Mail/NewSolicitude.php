@@ -11,16 +11,16 @@ class NewSolicitude extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    protected $solicitude;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($solicitude)
     {
-        $this->user = $user;
+        $this->solicitude = $solicitude;
     }
 
     /**
@@ -30,6 +30,8 @@ class NewSolicitude extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Solicitude')->view('emails.new-solicitude');
+        return $this->subject('PPS-UTN-Frro: Nueva Solicitud de PPS')->view('emails.new-solicitude')->with([
+            'userName' => $this->solicitude->student->name,
+        ]);
     }
 }

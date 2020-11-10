@@ -7,9 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Nueva solicitud de PPS realizada por el alumno: {{$userName}}</h2>
+    <h2>La revision "{{$revision}}" realizada por el alumno: {{$userName}} ha sido corregida</h2>
     <p>
-        Por favor ingresar al sistema para evaluar dicha solicitud.
+        Por favor ingresar al sistema para evaluar dicha revision.
     </p>
     <p>
         Saludos coordiales, Departamento de PPS UTN-Frro.

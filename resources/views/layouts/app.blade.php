@@ -59,7 +59,7 @@
     <main class="py-5 h-full min-h-screen">
         <div class="container mx-auto mb-5">
             @if (session('message'))
-                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-2" role="alert">
                     {{session('message')}}
                 </div>
             @endif
