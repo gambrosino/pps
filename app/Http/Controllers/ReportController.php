@@ -32,7 +32,7 @@ class ReportController extends Controller
 
         $professionalPractice->reports()->create($report);
 
-        return redirect('/');
+        return redirect('/')->with('message','Informe Final Creado');
     }
 
     public function update(Request $request, Report $report)
@@ -43,6 +43,6 @@ class ReportController extends Controller
         ]);
         $report->customUpdate($status);
 
-        return redirect('/');
+        return redirect('/')->with('message','Informe Final Actualizado');;
     }
 }

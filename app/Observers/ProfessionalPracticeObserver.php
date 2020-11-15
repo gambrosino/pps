@@ -3,7 +3,8 @@
 namespace App\Observers;
 
 use App\ProfessionalPractice;
-use App\Mail\NewPPS;
+use App\Mail\NewProfessionalPractice;
+use App\Mail\ProfessionalPracticeUpdated;
 use Illuminate\Support\Facades\Mail;
 
 class ProfessionalPracticeObserver
@@ -16,7 +17,8 @@ class ProfessionalPracticeObserver
      */
     public function created(ProfessionalPractice $professionalPractice)
     {
-        //
+        $tutor = $professionalPractice->tutor;
+        Mail::to($tutor)->send(new NewProfessionalPractice($professionalPractice));
     }
 
     /**
@@ -27,8 +29,8 @@ class ProfessionalPracticeObserver
      */
     public function updated(ProfessionalPractice $professionalPractice)
     {
-        if ($professionalPractice->isDirty('status')) {
-            $student = $professionalPractice->$solicitude->student;
+        if ($professionalPractice->isDirty('status') && $professionalPractice->revisions->count() > 0) {
+            $student = $professionalPractice->solicitude->student;
             Mail::to($student)->send(new ProfessionalPracticeUpdated);
         }
     }
