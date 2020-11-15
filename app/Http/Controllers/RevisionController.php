@@ -59,6 +59,6 @@ class RevisionController extends Controller
 
         $revision->update(['status'=>'pending']);
 
-        return redirect('/')->with('message','Revision Actualizada');
+        return redirect()->route('professional-practices.show',$revision->professionalPractice)->with('message','Revision Actualizada');
     }
 }

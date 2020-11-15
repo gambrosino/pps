@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Report;
+use App\User;
 use App\Mail\NewReport;
 use App\Mail\ReportUpdated;
 use Illuminate\Support\Facades\Mail;
@@ -17,8 +18,16 @@ class ReportObserver
      */
     public function created(Report $report)
     {
-        $tutor = $report->professionalPractice->tutor;
-        Mail::to($tutor)->send(new NewReport($report));
+        //send mail to tutor/admin when a revision is corrected
+        if($report->professionalPractice->status == 'in_revision') {
+            $receipt = User::whereHas('role', function ($q) {
+                $q->where('name', 'admin');
+            })->get();
+        }
+        else {
+            $receipt = $report->professionalPractice->tutor;
+        }
+        Mail::to($receipt)->send(new NewReport($report));
     }
 
     /**

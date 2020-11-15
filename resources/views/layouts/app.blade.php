@@ -59,7 +59,7 @@
     <main class="py-5 h-full min-h-screen">
         <div class="container mx-auto mb-5 flex justify-start">
             @if (Request::url() != route('home') && Request::url() != route('login') && Request::url() != route('register'))
-                    @include('partials.back', ['route' => url()->previous()])
+                    @include('partials.back', ['route' => '/'])
             @endif
             @if (session('message'))
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-2 shadow-md ml-3 inline-block w-full" role="alert">

@@ -7,11 +7,13 @@ use App\Solicitude;
 use App\ProfessionalPractice;
 use App\Revision;
 use App\Report;
+use App\Certificate;
 use App\Observers\UserObserver;
 use App\Observers\SolicitudeObserver;
 use App\Observers\ProfessionalPracticeObserver;
 use App\Observers\RevisionObserver;
 use App\Observers\ReportObserver;
+use App\Observers\CertificateObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -42,5 +44,6 @@ class AppServiceProvider extends ServiceProvider
         ProfessionalPractice::observe(ProfessionalPracticeObserver::class);
         Revision::observe(RevisionObserver::class);
         Report::observe(ReportObserver::class);
+        Certificate::observe(CertificateObserver::Class);
     }
 }

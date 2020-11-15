@@ -3,8 +3,10 @@
 namespace App\Observers;
 
 use App\ProfessionalPractice;
+use App\User;
 use App\Mail\NewProfessionalPractice;
 use App\Mail\ProfessionalPracticeUpdated;
+use App\Mail\ProfessionalPracticeInRevision;
 use Illuminate\Support\Facades\Mail;
 
 class ProfessionalPracticeObserver
@@ -32,6 +34,13 @@ class ProfessionalPracticeObserver
         if ($professionalPractice->isDirty('status') && $professionalPractice->revisions->count() > 0) {
             $student = $professionalPractice->solicitude->student;
             Mail::to($student)->send(new ProfessionalPracticeUpdated);
+
+            if($professionalPractice->status == 'in_revision') {
+                $admins = User::whereHas('role', function ($q) {
+                    $q->where('name', 'admin');
+                })->get();
+                Mail::to($admins)->send(new ProfessionalPracticeInRevision($professionalPractice));
+            }
         }
     }
 }

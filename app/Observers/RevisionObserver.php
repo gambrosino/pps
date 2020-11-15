@@ -34,7 +34,7 @@ class RevisionObserver
                 Mail::to($student)->send(new RevisionUpdated);
             }
             else { //send mail to tutor/admin when a revision is corrected
-                if($revision->professionalPractice->status == 'in-revision') {
+                if($revision->professionalPractice->status == 'in_revision') {
                     $receipt = User::whereHas('role', function ($q) {
                         $q->where('name', 'admin');
                     })->get();

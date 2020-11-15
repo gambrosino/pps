@@ -24,6 +24,6 @@ class CertificateController extends Controller
 
         $professionalPractice->complete();
 
-        return redirect('/');
+        return redirect('/')->with('message','Practica Profesional Completada!');
     }
 }

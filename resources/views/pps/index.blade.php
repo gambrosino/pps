@@ -5,7 +5,7 @@
 
 <div class="mx-auto container">
 
-    @if ($professionalPracticesInRevision->count() >= 1)
+    @if ($professionalPracticesInRevision->count() >= 1 && auth()->user()->role->name != 'tutor')
         <div class="w-full border-blue-400 mt-10 border-t-8 rounded bg-white pb-3">
             <div>
                 <h5 class="py-4 px-3 font-bold uppercase border-b border-gray-400">Practicas Profesionales En Revision</h5>
@@ -27,7 +27,7 @@
         </div>
     @endif
 
-    @if ($professionalPracticesCompleted->count() >= 1)
+    @if ($professionalPracticesCompleted->count() >= 1 && auth()->user()->role->name != 'tutor')
         <div class="w-full border-blue-400 mt-10 border-t-8 rounded bg-white pb-3">
             <div>
                 <h5 class="py-4 px-3 font-bold uppercase border-b border-gray-400">Practicas Profesionales Aprobadas</h5>

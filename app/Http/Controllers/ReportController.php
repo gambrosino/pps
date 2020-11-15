@@ -32,7 +32,7 @@ class ReportController extends Controller
 
         $professionalPractice->reports()->create($report);
 
-        return redirect('/')->with('message','Informe Final Creado');
+        return redirect()->route('professional-practices.show',$professionalPractice)->with('message','Informe Final Creado');
     }
 
     public function update(Request $request, Report $report)
