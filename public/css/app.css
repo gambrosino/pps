@@ -666,7 +666,6 @@ video {
 }
 
 .card-header {
-  @apply card-header flex items-center justify-center h-16;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54518,4 +54517,24 @@ video {
   .xl\:z-auto {
     z-index: auto;
   }
+}
+
+.custom-pagination {
+  margin-top:1%;
+  padding-top:1%;
+  border-top: 1px solid #e2e8f0;
+  background-color:#f7fafc
+}
+.custom-pagination nav ul {
+  display: flex;
+  justify-content: center;
+}
+.custom-pagination nav ul li{
+  margin-left:1%;
+  margin-right:1%;
+  padding:5px;
+}
+.custom-pagination nav ul li.active {
+  font-weight: 700;
+  text-decoration: underline;
 }

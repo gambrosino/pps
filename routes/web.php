@@ -45,6 +45,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('professional-practices/{professionalPractice}/certificate', 'CertificateController@create')->name('certificate.create');
     Route::post('professional-practices/{professionalPractice}/certificate', 'CertificateController@store')->name('certificate.store');
+
+    Route::get('users', 'UserController@index')->name('users.index');
+    Route::get('users/{user}', 'UserController@show')->name('users.show');
+    Route::delete('users/{user}', 'UserController@delete')->name('users.delete');
+    Route::patch('users/{user}', 'UserController@update')->name('users.update');
 });
 
 Auth::routes();

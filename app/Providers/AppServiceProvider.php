@@ -3,18 +3,19 @@
 namespace App\Providers;
 
 use App\User;
-use App\Solicitude;
-use App\ProfessionalPractice;
-use App\Revision;
 use App\Report;
+use App\Revision;
+use App\Solicitude;
 use App\Certificate;
+use App\ProfessionalPractice;
 use App\Observers\UserObserver;
-use App\Observers\SolicitudeObserver;
-use App\Observers\ProfessionalPracticeObserver;
-use App\Observers\RevisionObserver;
 use App\Observers\ReportObserver;
+use App\Observers\RevisionObserver;
+use Illuminate\Pagination\Paginator;
+use App\Observers\SolicitudeObserver;
 use App\Observers\CertificateObserver;
 use Illuminate\Support\ServiceProvider;
+use App\Observers\ProfessionalPracticeObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
