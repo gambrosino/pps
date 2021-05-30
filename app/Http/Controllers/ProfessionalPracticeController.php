@@ -10,22 +10,28 @@ use Illuminate\Http\Request;
 
 class ProfessionalPracticeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $professionalPracticesActives = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
-            ->where([ 'status' => 'active' ])
-            ->orWhere([ 'status' => 'hours_completed' ])
+        if ($request->status == 'active') {
+            $professionalPractices = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
+                ->where([ 'status' => $request->status ])
+                ->orWhere([ 'status' => 'hours_completed' ])
+                ->get();
+        } else {
+            $professionalPractices = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
+            ->where([ 'status' => $request->status ])
             ->get();
+        }
 
-        $professionalPracticesInRevision = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
-        ->where([ 'status' => 'in_revision' ])
-        ->get();
+        $status = '';
+        switch($request->status) {
+            case 'active': $status = 'activas';break;
+            case 'in_revision': $status = 'en revision';break;
+            case 'completed': $status = 'completadas';break;
+        }
+        $status = ["status" => $status];
 
-        $professionalPracticesCompleted = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
-        ->where([ 'status' => 'completed' ])
-        ->get();
-
-        return view('pps.index', compact('professionalPracticesActives', 'professionalPracticesInRevision', 'professionalPracticesCompleted'));
+        return view('pps.index', compact('professionalPractices', 'status'));
     }
 
     public function show(ProfessionalPractice $professionalPractice)

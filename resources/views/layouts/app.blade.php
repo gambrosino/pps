@@ -33,32 +33,107 @@
                         <!-- Authentication Links -->
                         @guest
                             <li>
-                                <a class="navbar-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="navbar-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="ml-6">
-                                    <a class="navbar-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="navbar-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif
                         @else
+                            <li>
+                                <a class="navbar-link mx-3" href="{{ route('home')}}" role="button">
+                                    Página Principal <span class="caret"></span>
+                                </a>
+                            </li>
                             @if ( auth()->user()->role->name == 'admin' )
                                 <li>
-                                    <a id="userList" class="navbar-link" href="{{ route('users.index')}}" role="button">
+                                    <a class="navbar-link mx-3" href="{{ route('users.index')}}" role="button">
                                         Usuarios <span class="caret"></span>
                                     </a>
                                 </li>
+
+                                <li>
+                                    <div class="relative">
+                                        <input type="checkbox" id="sortbox-solicitudes" class="hidden absolute">
+                                        <label class="cursor-pointer navbar-link mx-3" for="sortbox-solicitudes" class="flex items-center space-x-1 cursor-pointer">
+                                            Solicitudes
+                                        </label>
+                                        <div id="sortboxmenu-solicitudes" class="absolute mt-3 right-1 top-full min-w-max shadow rounded opacity-0  transition delay-75 ease-in-out z-10">
+                                            <ul class="block text-right text-gray-900">
+                                                <li class="sortboxmenuitem">
+                                                    <a class="navbar-link mx-3" href="{{ route('solicitude.index')}}?status=pending" role="button">
+                                                        Solicitudes Pendientes<span class="caret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="sortboxmenuitem">
+                                                    <a class="navbar-link mx-3" href="{{ route('solicitude.index')}}?status=accepted" role="button">
+                                                        Solicitudes Aceptadas<span class="caret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="sortboxmenuitem">
+                                                    <a class="navbar-link mx-3" href="{{ route('solicitude.index')}}?status=rejected" role="button">
+                                                        Solicitudes Rechazadas<span class="caret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
                             @endif
-                            <li class="ml-6">
-                                <a id="navbarDropdown" class="navbar-link" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                            </li>
-                            <li class="ml-6">
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="navbar-link" type="submit">{{ __('Logout') }}</button>
-                                </form>
+
+                            @if ( auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'tutor')
+                                <li>
+                                    <div class="relative">
+                                        <input type="checkbox" id="sortbox-pps" class="hidden absolute">
+                                        <label class="cursor-pointer navbar-link mx-3" for="sortbox-pps" class="flex items-center space-x-1 cursor-pointer">
+                                            Practica Profesional
+                                        </label>
+                                        <div id="sortboxmenu-pps" class="absolute mt-3 right-1 top-full min-w-max shadow rounded opacity-0  transition delay-75 ease-in-out z-10">
+                                            <ul class="block text-right text-gray-900">
+                                                <li class="sortboxmenuitem">
+                                                    <a class="navbar-link mx-3" href="{{ route('professional-practices.index') }}?status=active" role="button">
+                                                        Practicas Activas<span class="caret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="sortboxmenuitem">
+                                                    <a class="navbar-link mx-3" href="{{ route('professional-practices.index') }}?status=in_revision" role="button">
+                                                        Practicas En Revision<span class="caret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="sortboxmenuitem">
+                                                    <a class="navbar-link mx-3" href="{{ route('professional-practices.index') }}?status=completed" role="button">
+                                                        Practicas Aprobadas<span class="caret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
+
+                            <li>
+                                <div class="relative">
+                                    <input type="checkbox" id="sortbox-profile" class="hidden absolute">
+                                    <label class="cursor-pointer navbar-link mx-3" for="sortbox-profile" class="flex items-center space-x-1 cursor-pointer">
+                                        {{ Auth::user()->name }}
+                                    </label>
+                                    <div id="sortboxmenu-profile" class="absolute mt-3 right-1 top-full min-w-max shadow rounded opacity-0  transition delay-75 ease-in-out z-10">
+                                        <ul class="block text-right text-gray-900">
+                                            <li class="sortboxmenuitem">
+                                                <a class="navbar-link mx-3" href="{{ route('users.show', ['user' => Auth::user()]) }}" role="button">
+                                                    Perfil <span class="caret"></span>
+                                                </a>
+                                            </li>
+                                            <li class="sortboxmenuitem">
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                    @csrf
+                                                    <button class="navbar-link mx-3" type="submit">{{ __('Cerrar Sesión') }}</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </li>
                         @endguest
                     </ul>

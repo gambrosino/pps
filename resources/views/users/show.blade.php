@@ -24,7 +24,7 @@
 
                     <div class="field-group">
                         <label for="file_number" class="field-label">Legajo</label>
-                        <input id="file_number" type="text" name="file_number" value="{{ $user->file_number }}" class="field @error('file_number') is-invalid @enderror"></input>
+                        <input id="file_number" type="text" name="file_number" value="{{ $user->file_number }}" class="field @error('file_number') is-invalid @enderror" readonly />
                         @error('file_number')
                             <span class="field-error" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -42,7 +42,7 @@
                         @enderror
                     </div>
 
-                    @if ($user->role_id != 1)
+                    @if ($user->role_id == 1)
                         <div class="field-group">
                             <label class="field-label" for="isTutor"><input class="mr-2" type="checkbox" name="isTutor" id="isTutor" @if($user->role_id == 3) checked @endif> Es Tutor</label>
                         </div>

@@ -54538,3 +54538,19 @@ video {
   font-weight: 700;
   text-decoration: underline;
 }
+
+#sortbox-solicitudes:checked ~ #sortboxmenu-solicitudes,
+#sortbox-profile:checked ~ #sortboxmenu-profile,
+#sortbox-pps:checked ~ #sortboxmenu-pps {
+  opacity: 1;
+}
+
+#sortbox-solicitudes:checked ~ #sortboxmenu-solicitudes .sortboxmenuitem,
+#sortbox-profile:checked ~ #sortboxmenu-profile .sortboxmenuitem,
+#sortbox-pps:checked ~ #sortboxmenu-pps .sortboxmenuitem {
+  width: auto;
+  white-space: nowrap;
+  padding: 20px 10px;
+  background-color: white;
+  text-align:center;
+}

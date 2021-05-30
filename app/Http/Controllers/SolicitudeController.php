@@ -7,15 +7,19 @@ use App\Solicitude;
 
 class SolicitudeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $solicitudes = Solicitude::whereStatus('pending')->get();
+        $solicitudes = Solicitude::whereStatus($request->status)->get();
 
-        $acceptedSolicitudes = Solicitude::whereStatus('accepted')->get();
+        $status = '';
+        switch($request->status) {
+            case 'accepted': $status = 'aceptadas';break;
+            case 'rejected': $status = 'rechazadas';break;
+            case 'pending': $status = 'pendientes';break;
+        }
+        $status = ["status" => $status];
 
-        $rejectedSolicitudes = Solicitude::whereStatus('rejected')->get();
-
-        return view('solicitudes.index', compact('solicitudes', 'acceptedSolicitudes', 'rejectedSolicitudes'));
+        return view('solicitudes.index', compact('solicitudes','status'));
     }
 
     public function show(Solicitude $solicitude)
