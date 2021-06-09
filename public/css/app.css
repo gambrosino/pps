@@ -54554,3 +54554,16 @@ video {
   background-color: white;
   text-align:center;
 }
+
+.button.delete-button {
+  background-color:#f56565;
+}
+.button.delete-button:hover {
+  background-color:#f34343!important;
+}
+.button.new-button {
+  background-color: #63b3ed;
+}
+.button.new-button:hover {
+  background-color: #34a2f0;
+}

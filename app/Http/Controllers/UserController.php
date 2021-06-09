@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -28,7 +31,17 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        //TODO
+        $user = $this->validate($request, [
+            'name'          => 'required|string|min:10',
+            'file_number'   => 'required|unique:users,file_number|string|min:5',
+            'email'         => 'required|unique:users,email|email:rfc'
+        ]);
+
+        $role_id = $request->input('is_tutor') == 'on' ? User::ROLES['TUTOR'] : User::ROLES['STUDENT'];
+        $user['role_id'] = $role_id;
+        $user['password'] = Hash::make(Str::random(10));
+
+        $newUser = User::create($user);
 
         return redirect()->route('users.index')->with('message','Usuario Creado');
     }
@@ -37,8 +50,8 @@ class UserController extends Controller
     {
         abort_unless(Auth::user()->role->name == 'admin' || Auth::user()->id == $user->id ,403);
         $fields = $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required'
+            'name' => 'required|string|min:10',
+            'email' => 'required|email:rfc'
         ]);
 
         $user->update($fields);

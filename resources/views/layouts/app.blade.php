@@ -48,7 +48,7 @@
                             </li>
                             @if ( auth()->user()->role->name == 'admin' )
                                 <li>
-                                    <a class="navbar-link mx-3" href="{{ route('users.index')}}" role="button">
+                                    <a class="navbar-link mx-3" href="{{ route('users.index') }}" role="button">
                                         Usuarios <span class="caret"></span>
                                     </a>
                                 </li>

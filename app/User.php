@@ -8,6 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    CONST ROLES = [
+        'ADMIN' => '1',
+        'STUDENT' => '2',
+        'TUTOR' => '3',
+    ];
+
     use Notifiable;
 
     /**
