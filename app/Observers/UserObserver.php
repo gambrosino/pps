@@ -3,8 +3,9 @@
 namespace App\Observers;
 
 use App\User;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUser;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 
 class UserObserver
 {
@@ -16,8 +17,11 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //TODO: Uncomment this function at the end of the project
-        //Mail::to($user)->send(new NewUser($user->name));
+        //Comment following line until project is finished
+        Mail::to($user)->send(new NewUser($user->name));
+        if ($user->role_id == User::ROLES['TUTOR']) {
+            Password::broker()->sendResetLink(['email' => $user->email]);
+        }
     }
 
     /**
