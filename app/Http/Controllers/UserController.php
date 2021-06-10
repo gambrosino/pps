@@ -40,7 +40,7 @@ class UserController extends Controller
         $role_id = $request->input('is_tutor') == 'on' ? User::ROLES['TUTOR'] : User::ROLES['STUDENT'];
         $user['role_id'] = $role_id;
         $user['password'] = Hash::make(Str::random(10));
-
+        $user['from_dashboard'] = true;
         $newUser = User::create($user);
 
         return redirect()->route('users.index')->with('message','Usuario Creado');

@@ -17,11 +17,11 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //Comment following line until project is finished
-        Mail::to($user)->send(new NewUser($user->name));
-        if ($user->role_id == User::ROLES['TUTOR']) {
+        if ($user->from_dashboard) {
             Password::broker()->sendResetLink(['email' => $user->email]);
         }
+        //Comment following line until project is finished
+        Mail::to($user)->send(new NewUser($user->name));
     }
 
     /**

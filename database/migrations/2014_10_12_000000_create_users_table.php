@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('file_number')->unique();
             $table->string('email')->unique();
+            $table->boolean('from_dashboard')->default(false);
             $table->boolean('deleted')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
