@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\ProfessionalPractice;
 use App\Role;
-use App\Solicitude;
 use App\User;
+use App\Solicitude;
 use Illuminate\Http\Request;
+use App\ProfessionalPractice;
+use Illuminate\Support\Facades\Auth;
 
 class ProfessionalPracticeController extends Controller
 {
     public function index(Request $request)
     {
+        abort_if(Auth::user()->role->name == 'student',403);
+
         if ($request->status == 'active') {
             $professionalPractices = ProfessionalPractice::with(['solicitude.student', 'tutor', 'revisions'])
                 ->where([ 'status' => $request->status ])
@@ -36,6 +39,12 @@ class ProfessionalPracticeController extends Controller
 
     public function show(ProfessionalPractice $professionalPractice)
     {
+        abort_unless(
+            Auth::user()->role->name == 'admin' ||
+            Auth::user()->id == $professionalPractice->tutor->id ||
+            Auth::user()->id == $professionalPractice->solicitude->student->id
+            ,403);
+
         $professionalPractice->load(['solicitude.student', 'revisions', 'tutor']);
 
         return view('pps.show', compact('professionalPractice'));

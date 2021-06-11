@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\ProfessionalPractice;
-use App\Revision;
 use App\Document;
+use App\Revision;
 use Illuminate\Http\Request;
+use App\ProfessionalPractice;
+use Illuminate\Support\Facades\Auth;
 
 class RevisionController extends Controller
 {
@@ -16,6 +17,12 @@ class RevisionController extends Controller
 
     public function show(Revision $revision)
     {
+        abort_unless(
+            Auth::user()->role->name == 'admin' ||
+            Auth::user()->id == $revision->professionalPractice->tutor->id ||
+            Auth::user()->id == $revision->professionalPractice->solicitude->student->id
+            ,403);
+
         $revision->load('documents');
 
         return view('revisions.show', compact('revision'));
@@ -45,6 +52,11 @@ class RevisionController extends Controller
 
     public function update(Request $request, Revision $revision)
     {
+        abort_unless(
+            Auth::user()->role->name == 'admin' ||
+            Auth::user()->id == $revision->professionalPractice->tutor->id
+            ,403);
+
         $request->validate([
             'title' => 'required|string|min:5',
             'document' => 'required|mimes:pdf,doc,docx',

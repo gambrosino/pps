@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\ProfessionalPractice;
 use App\Report;
 use App\Document;
 use Illuminate\Http\Request;
+use App\ProfessionalPractice;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -16,6 +17,12 @@ class ReportController extends Controller
 
     public function show(Report $report)
     {
+        abort_unless(
+            Auth::user()->role->name == 'admin' ||
+            Auth::user()->id == $report->professionalPractice->tutor->id ||
+            Auth::user()->id == $report->professionalPractice->solicitude->student->id
+            ,403);
+
         return view('reports.show', compact('report'));
     }
 
@@ -37,6 +44,11 @@ class ReportController extends Controller
 
     public function update(Request $request, Report $report)
     {
+        abort_unless(
+            Auth::user()->role->name == 'admin' ||
+            Auth::user()->id == $report->professionalPractice->tutor->id
+            ,403);
+
         $status = $request->validate([
             'status'  => 'required|string|in:accepted,rejected',
             'message' => 'required|string|min:20'

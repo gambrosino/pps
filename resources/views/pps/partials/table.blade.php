@@ -11,16 +11,21 @@
     </thead>
     <tbody>
     @foreach ($professionalPractices as $p)
-        <tr>
-            <td class="px-3 py-3">{{ $p->solicitude->student->name }}</td>
-            <td class="px-3 py-3">{{ $p->solicitude->student->file_number }}</td>
-            <td class="px-3 py-3">{{ $p->created_at->format('d/m/Y') }}</td>
-            <td class="px-3 py-3">{{ $p->revisions->count()}}</td>
-            <td class="px-3 py-3">{{ $p->tutor->name }}</td>
-            <td class="px-3 py-3">
-                <a href="{{ route('professional-practices.show', ['professionalPractice' => $p]) }}" class="button">Ver</a>
-            </td>
-        </tr>
+        @if (
+            auth()->user()->role->name == 'admin' ||
+            (auth()->user()->role->name == 'tutor' && $p->tutor->id == auth()->user()->id)
+            )
+            <tr>
+                <td class="px-3 py-3">{{ $p->solicitude->student->name }}</td>
+                <td class="px-3 py-3">{{ $p->solicitude->student->file_number }}</td>
+                <td class="px-3 py-3">{{ $p->created_at->format('d/m/Y') }}</td>
+                <td class="px-3 py-3">{{ $p->revisions->count()}}</td>
+                <td class="px-3 py-3">{{ $p->tutor->name }}</td>
+                <td class="px-3 py-3">
+                    <a href="{{ route('professional-practices.show', ['professionalPractice' => $p]) }}" class="button">Ver</a>
+                </td>
+            </tr>
+        @endif
     @endforeach
 
     @if($professionalPractices->count() == 0)

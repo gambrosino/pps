@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Solicitude;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SolicitudeController extends Controller
 {
     public function index(Request $request)
     {
+        abort_unless(Auth::user()->role->name == 'admin' ,403);
         $solicitudes = Solicitude::whereStatus($request->status)->get();
 
         $status = '';
@@ -24,6 +26,7 @@ class SolicitudeController extends Controller
 
     public function show(Solicitude $solicitude)
     {
+        abort_unless(Auth::user()->role->name == 'admin' || Auth::user()->id == $solicitude->student->id ,403);
         $solicitude->load('student');
 
         return view('solicitudes.show', compact('solicitude'));
@@ -52,6 +55,7 @@ class SolicitudeController extends Controller
 
     public function update(Request $request, Solicitude $solicitude)
     {
+        abort_unless(Auth::user()->role->name == 'admin');
         $fields = $this->validate($request, [
             'message' => 'required|min:20'
         ]);

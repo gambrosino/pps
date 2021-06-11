@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
     public function show(Document $document)
     {
+        abort_unless(
+            Auth::user()->role->name == 'admin' ||
+            Auth::user()->id == $document->revision->professionalPractice->tutor->id
+            ,403);
+
         return view('documents.show', compact('document'));
     }
 

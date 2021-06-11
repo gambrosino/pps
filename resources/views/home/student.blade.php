@@ -1,4 +1,4 @@
-<div class="card mx-10">
+<div class="card w-1/3 mx-10">
     <div class="card-header">
         <h3 class="card-title">
             Datos
@@ -29,7 +29,7 @@
 
 @if($user->solicitudes->count() == 0 ||
     (is_null($user->solicitudes->last()->professionalPractice)) )
-<div class="card mx-10">
+<div class="card w-1/3 mx-10">
     <div class="card-header">
         <h3 class="card-title">
             Solicitud
