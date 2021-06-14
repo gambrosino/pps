@@ -18,6 +18,7 @@ class CreateRevisionsTable extends Migration
             $table->unsignedBigInteger('professional_practice_id');
             $table->text('description');
             $table->string('status')->default('pending');
+            $table->integer('number');
 
             $table->timestamps();
         });

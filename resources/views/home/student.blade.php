@@ -64,7 +64,7 @@
             @endif
             <div class="mt-3 mb-3">
                 <a href="{{ asset('storage/solicitude/'.$solicitude->path) }}"
-                   target="_blank" class="text-blue-600 font-bold" target="_blank">
+                   target="_blank" class="button" target="_blank">
                     Ver Solicitud
                 </a>
             </div>

@@ -1,6 +1,6 @@
-<div class="card mx-2 px-">
+<div class="card w-1/2 mx-2 px-">
     <div class="card-header">
-        <h3 class="card-title">Menu</h3>
+        <h3 class="card-title">Bienvenido al Sistema de PPS de la UTN Frro</h3>
     </div>
     <div class="card-body">
         @foreach($buttons as $button)

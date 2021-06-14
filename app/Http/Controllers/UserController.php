@@ -21,6 +21,7 @@ class UserController extends Controller
 
     public function create()
     {
+        abort_unless(Auth::user()->role->name == 'admin' ,403);
         return view('users.create');
     }
 
@@ -32,12 +33,12 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        abort_unless(Auth::user()->role->name == 'admin' ,403);
         $user = $this->validate($request, [
             'name'          => 'required|string|min:10',
             'file_number'   => 'required|unique:users,file_number|string|min:5',
             'email'         => 'required|unique:users,email|email:rfc'
         ]);
-
         $role_id = $request->input('is_tutor') == 'on' ? User::ROLES['TUTOR'] : User::ROLES['STUDENT'];
         $user['role_id'] = $role_id;
         $user['password'] = Hash::make(Str::random(10));
@@ -54,7 +55,6 @@ class UserController extends Controller
             'name' => 'required|string|min:10',
             'email' => 'required|email:rfc'
         ]);
-
         $user->update($fields);
 
         return redirect()->route('users.index')->with('message','Usuario Actualizado');
@@ -63,7 +63,6 @@ class UserController extends Controller
     public function delete(User $user)
     {
         abort_if(Auth::user()->role->name != 'admin' || $user->role->name == 'admin', 403);
-
         $user->update(['deleted' => true]);
 
         return redirect()->route('users.index')->with('message','Usuario Eliminado');

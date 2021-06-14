@@ -26,9 +26,9 @@ class AdminComposer
     public function compose(View $view)
     {
         $buttons = collect([
-            ['route' => route('solicitude.index'), 'text' => 'Ver Solicitudes'],
-            ['route' => route('professional-practices.index'), 'text' => 'Practicas Profesionales'],
-//            ['route' => '', 'text' => 'Revisiones'],
+            ['route' => route('users.create'), 'text' => 'Añadir Usuario'],
+            ['route' => route('solicitude.index').'?status=pending', 'text' => 'Ver Solicitudes Pendientes'],
+            ['route' => route('professional-practices.index').'?status=in_revision', 'text' => 'Practicas Profesionales en Revisión'],
 //            ['route' => '', 'text' => 'Alumnos'],
 //            ['route' => '', 'text' => 'Tutores'],
         ])//->shuffle()

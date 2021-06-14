@@ -4,7 +4,7 @@
 
     <div class="container cards-container">
         <div class="card pb-6">
-            <div class="card-header">
+            <div class="card-header px-4">
                 <h3 class="card-title">
                     {{$report->title}}
                 </h3>

@@ -11,9 +11,8 @@
                     <a href="{{ route('revisions.show', ['revision' => $revision]) }}" class="revision-item">
                         <div>
                             <h6 class="font-semibold">
-                                Avance {{$revision->id}}
+                                Avance {{$revision->number}} entregado el {{$revision->created_at->format('d/m/Y')}}
                             </h6>
-                            <div>Fecha de entrega: {{$revision->created_at->format('d/m/Y')}}</div>
                             <div>Horas: {{$revision->documents->last()->hours}}</div>
                         </div>
                         <div class="ml-auto py-2">
@@ -38,10 +37,9 @@
                 @foreach ($professionalPractice->getAcceptedRevisions() as $revision)
                     <a href="{{ route('revisions.show', ['revision' => $revision]) }}" class="revision-item">
                         <div>
-                            <h6 class="font-semibold">
-                                Avance {{$revision->id}}
+                        <h6 class="font-semibold">
+                                Avance {{$revision->number}} entregado el {{$revision->created_at->format('d/m/Y')}}
                             </h6>
-                            <div>Fecha de entrega: {{$revision->created_at->format('d/m/Y')}}</div>
                             <div>Horas: {{$revision->documents->last()->hours}}</div>
                         </div>
                         <div class="ml-auto py-2">
