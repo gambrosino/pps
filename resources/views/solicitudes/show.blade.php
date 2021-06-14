@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+@section('backbutton')
+    @if(auth()->user()->role->name == 'student')
+        @include('partials.back', ['route' => route('home')])
+    @else
+        @include('partials.back', ['route' => route('solicitude.index').'?status='.$solicitude->status])
+    @endif
+@endsection
 @section('content')
 
     <div class="container cards-container">

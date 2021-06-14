@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
+use App\Setting;
 use App\Solicitude;
 use Illuminate\Http\Request;
 use App\ProfessionalPractice;
@@ -43,8 +44,9 @@ class ProfessionalPracticeController extends Controller
             Auth::user()->id == $professionalPractice->solicitude->student->id
             ,403);
         $professionalPractice->load(['solicitude.student', 'revisions', 'tutor']);
+        $setting = Setting::find(1);
 
-        return view('pps.show', compact('professionalPractice'));
+        return view('pps.show', compact('professionalPractice', 'setting'));
     }
 
     public function create(Solicitude $solicitude)

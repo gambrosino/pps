@@ -52,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::delete('users/{user}', 'UserController@delete')->name('users.delete');
     Route::patch('users/{user}', 'UserController@update')->name('users.update');
+
+    Route::get('settings', 'SettingController@index')->name('settings.index');
+    Route::patch('settings/{setting}', 'SettingController@update')->name('settings.update');
 });
 
 Auth::routes();

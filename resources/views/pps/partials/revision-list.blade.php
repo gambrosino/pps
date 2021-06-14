@@ -1,9 +1,13 @@
-@if ($professionalPractice->getNonAcceptedRevisions()->count() != 0)
+@if ($professionalPractice->status <> "completed")
     <div class="card pb-6">
-        <div class="card-header">
+        <div class="card-header justify-around">
             <h3 class="card-title">
                 Avances Pendientes
             </h3>
+            @if ($professionalPractice->getNonAcceptedRevisions()->count() != 0 && auth()->user()->role->name == 'student')
+                    <a class="button" href="{{ route('revisions.create', ['professionalPractice' => $professionalPractice]) }}"
+                    class="text-blue-600 font-bold">Nuevo</a>
+            @endif
         </div>
         <div class="card-body">
             <div class="revision-list">
@@ -55,10 +59,15 @@
 
 @if ($professionalPractice->status != "active")
     <div class="card pb-6">
-        <div class="card-header">
+        <div class="card-header justify-around">
             <h3 class="card-title">
                 Informe Final
             </h3>
+            @if(auth()->user()->role->name == 'student')
+                @if ($professionalPractice->canAddNewReport())
+                    <a class="button" href="{{ route('reports.create', ['professionalPractice' => $professionalPractice]) }}">Nuevo</a>
+                @endif
+            @endif
         </div>
         <div class="card-body">
             <div class="revision-list">

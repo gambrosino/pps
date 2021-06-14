@@ -73,4 +73,15 @@ class ProfessionalPractice extends Model
             $this->update(['status'=>'completed']);
         }
     }
+
+    public function canAddNewReport()
+    {
+        $hoursCompleted = $this->status == 'hours_completed';
+        $noReports = $this->reports->count() == 0;
+        $inRevision = $this->status == 'in_revision';
+        if (!$noReports) {
+            $rejectedReport = $this->reports->last()->status == 'rejected';
+        }
+        return ($hoursCompleted && $noReports) || (($hoursCompleted || $inRevision) && $rejectedReport);
+    }
 }

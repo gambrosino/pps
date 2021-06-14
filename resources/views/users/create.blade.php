@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('backbutton')
+    @include('partials.back', ['route' => route('users.index')])
+@endsection
 @section('content')
 
     <div class="container cards-container">

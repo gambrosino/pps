@@ -1,4 +1,4 @@
-<div class="card w-1/3 mx-10">
+<div class="card">
     <div class="card-header">
         <h3 class="card-title">
             Datos
@@ -20,6 +20,10 @@
     </div>
 </div>
 
+@include('home.partials.links', [
+    'setting' => $setting
+])
+
 @foreach($user->solicitudes as $solicitude)
 
     @includeWhen(!is_null($solicitude->professionalPractice), 'pps.partials.card', [
@@ -29,7 +33,7 @@
 
 @if($user->solicitudes->count() == 0 ||
     (is_null($user->solicitudes->last()->professionalPractice)) )
-<div class="card w-1/3 mx-10">
+<div class="card">
     <div class="card-header">
         <h3 class="card-title">
             Solicitud
@@ -44,6 +48,14 @@
                     {{ __('status.solicitude.' . $solicitude->status) }}
                 </span>
             </div>
+            @if ($solicitude->status == 'rejected')
+                <div class="mt-2">
+                    <span class="text-gray-700 uppercase font-semibold tracking-wide">Motivo de Rechazo:</span>
+                    <p>
+                        {{$solicitude->message}}
+                    </p>
+                </div>
+            @endif
             <div class="mt-2">
                 <span class="text-gray-700 uppercase font-semibold tracking-wide">Descripcion:</span>
                 <p>
@@ -54,14 +66,6 @@
                 <span class="text-gray-700 uppercase font-semibold tracking-wide">Fecha de solicitud:</span>
                 {{$solicitude->created_at->format('d/m/Y')}}
             </div>
-            @if ($solicitude->status == 'rejected')
-                <div class="mt-2">
-                    <span class="text-gray-700 uppercase font-semibold tracking-wide">Motivo de Rechazo:</span>
-                    <p>
-                        {{$solicitude->message}}
-                    </p>
-                </div>
-            @endif
             <div class="mt-3 mb-3">
                 <a href="{{ asset('storage/solicitude/'.$solicitude->path) }}"
                    target="_blank" class="button" target="_blank">

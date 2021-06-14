@@ -48,6 +48,11 @@
                             </li>
                             @if ( auth()->user()->role->name == 'admin' )
                                 <li>
+                                    <a class="navbar-link mx-3" href="{{ route('settings.index') }}" role="button">
+                                        Configuraciones <span class="caret"></span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="navbar-link mx-3" href="{{ route('users.index') }}" role="button">
                                         Usuarios <span class="caret"></span>
                                     </a>
@@ -142,9 +147,7 @@
         </nav>
         <main class="py-5 h-full min-h-screen">
             <div class="container mx-auto mb-5 flex justify-start">
-                @if (Request::url() != route('home') && Request::url() != route('login') && Request::url() != route('register'))
-                        @include('partials.back', ['route' => url()->previous()])
-                @endif
+                @yield('backbutton')
                 @if (session('message'))
                     <div class="bg-teal-100 border-t-4 text-center border-teal-500 rounded-b text-teal-900 px-4 py-2 shadow-md ml-3 inline-block w-full" role="alert">
                         {{session('message')}}

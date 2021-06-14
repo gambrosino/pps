@@ -163,6 +163,7 @@ return [
         'first_name'            => 'nombre',
         'gender'                => 'género',
         'hour'                  => 'hora',
+        'hours'                 => 'cantidad de horas',
         'last_name'             => 'apellido',
         'message'               => 'mensaje',
         'minute'                => 'minuto',

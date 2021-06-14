@@ -19,9 +19,9 @@ class UserObserver
     {
         if ($user->from_dashboard) {
             Password::broker()->sendResetLink(['email' => $user->email]);
+        } else {
+            Mail::to($user)->send(new NewUser($user->name));
         }
-        //Comment following line until project is finished
-        Mail::to($user)->send(new NewUser($user->name));
     }
 
     /**

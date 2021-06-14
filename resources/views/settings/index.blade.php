@@ -1,27 +1,23 @@
 @extends('layouts.app')
 @section('backbutton')
-    @if(auth()->user()->role->name == 'admin')
-        @include('partials.back', ['route' => route('users.index')])
-    @else
-        @include('partials.back', ['route' => route('home')])
-    @endif
+    @include('partials.back', ['route' => route('home')])
 @endsection
 @section('content')
 
     <div class="container cards-container">
-        <div class="card pb-6">
+        <div class="card w-1/2 pb-6">
             <div class="card-header px-4">
                 <h3 class="card-title">
-                    {{$user->name}}
+                    Configuraciones de Sistema
                 </h3>
             </div>
             <div class="card-body">
-                <form class="mt-4" method="POST" action="{{route('users.update', ['user' => $user]) }}">
+                <form class="mt-4" method="POST" action="{{route('settings.update', ['setting' => $setting]) }}">
                     
                     <div class="field-group">
-                        <label for="name" class="field-label">Nombre</label>
-                        <input type="text" id="name" name="name" value="{{ $user->name }}" class="field @error('name') is-invalid @enderror" >
-                            @error('name')
+                        <label for="solicitude_link" class="field-label">Link PDF de Solicitud</label>
+                        <input type="text" id="solicitude_link" name="solicitude_link" value="{{ $setting->solicitude_link }}" class="field @error('solicitude_link') is-invalid @enderror" >
+                            @error('solicitude_link')
                                 <span class="field-error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -29,9 +25,9 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="file_number" class="field-label">Legajo</label>
-                        <input id="file_number" type="text" name="file_number" value="{{ $user->file_number }}" class="field @error('file_number') is-invalid @enderror" readonly />
-                        @error('file_number')
+                        <label for="revision_link" class="field-label">Link PDF de Avances</label>
+                        <input id="revision_link" type="text" name="revision_link" value="{{ $setting->revision_link }}" class="field @error('revision_link') is-invalid @enderror" />
+                        @error('revision_link')
                             <span class="field-error" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -39,9 +35,9 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="email" class="field-label">Email</label>
-                        <input id="email" type="text" name="email" value="{{ $user->email }}" class="field @error('email') is-invalid @enderror"></input>
-                        @error('email')
+                        <label for="report_link" class="field-label">Link PDF de Reporte Final</label>
+                        <input id="report_link" type="text" name="report_link" value="{{ $setting->report_link }}" class="field @error('report_link') is-invalid @enderror"></input>
+                        @error('report_link')
                             <span class="field-error" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

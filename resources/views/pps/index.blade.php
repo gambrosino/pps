@@ -1,6 +1,8 @@
 
 @extends('layouts.app')
-
+@section('backbutton')
+    @include('partials.back', ['route' => route('home')])
+@endsection
 @section('content')
 
 <div class="mx-auto container">

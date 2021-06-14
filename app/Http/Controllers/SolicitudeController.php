@@ -33,13 +33,13 @@ class SolicitudeController extends Controller
 
     public function create()
     {
-        abort_unless(Auth::user()->id == $solicitude->student->id ,403);
+        abort_unless(Auth::user()->role->name == 'student' ,403);
         return view('solicitudes.create');
     }
 
     public function store(Request $request)
     {
-        abort_unless(Auth::user()->id == $solicitude->student->id ,403);
+        abort_unless(Auth::user()->role->name == 'student' ,403);
         $this->validate($request, [
             'description' => 'required',
             'attachment' => 'required|mimes:pdf|max:20048'
@@ -53,7 +53,7 @@ class SolicitudeController extends Controller
 
     public function update(Request $request, Solicitude $solicitude)
     {
-        abort_unless(Auth::user()->role->name == 'admin');
+        abort_unless(Auth::user()->role->name == 'admin', 403);
         $fields = $this->validate($request, [
             'message' => 'required|min:20'
         ]);

@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('backbutton')
+    @include('partials.back', ['route' => route('revisions.show',$document->revision)])
+@endsection
 @section('content')
 
     <div class="container cards-container">

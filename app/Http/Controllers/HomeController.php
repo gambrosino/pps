@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $setting = Setting::find(1);
 
-        return view('home', compact('user'));
+        return view('home', compact('user','setting'));
     }
 }
